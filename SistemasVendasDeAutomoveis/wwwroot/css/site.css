@@ -1,0 +1,94 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    min-height: 95vh;
+    background-color: var(--bs-dark);
+    background-image: var(--bs-gradient);
+    color: white;
+}
+
+
+
+footer{
+    margin-top: auto;
+}
+
+#caixaPesquisa {
+    font-size: 18px;
+    /*border: solid 1px black;*/
+    min-width: 50vw;
+    padding: 40px;
+    margin-top: 15px;
+    background-color: var(--bs-blue);
+    background-image: var(--bs-gradient);
+    border-radius: 7px;
+    box-shadow: 2px 2px 3px 3px black;
+}
+
+#campoPesquisa {
+    background-color: var(--bs-dark);
+    /*border: solid 1px slategrey;*/
+
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 5px 1px black;
+    min-width: inherit;
+    color: white;
+}
+
+#carrosPagina {
+    min-height: 100vh;
+    min-width: 88vw;
+    margin: 0px;
+   /* background-color: var(--bs-dark);*/
+}
+
+#sideBarFiltros {
+    min-height: 100vh;
+    /* padding: 10px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 2px;
+    margin-left: 15px;
+}
+
+#selecaoFiltros {
+   flex: 1;
+    margin: 2px;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.filtros {
+    border: solid 1px black;
+}
+
+#exibirCards {
+    padding: 10px;
+}
+
+#selecoesCards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: stretch;
+    flex-direction: row;
+    padding: 10px;
+}
