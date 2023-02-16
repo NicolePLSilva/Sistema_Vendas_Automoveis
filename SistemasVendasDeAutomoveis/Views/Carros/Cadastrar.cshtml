@@ -1,0 +1,127 @@
+﻿@using SistemasVendasDeAutomoveis.Enums
+@model CarroModel
+@{
+    ViewData["Title"] = "Cadastrar Veículo";
+}
+<div class="text-center bg-dark">
+    <H1 class="display-1">Cadastrar veículo</H1>
+</div>
+<div class="divCentralizada bg-dark ">
+
+    <form asp-controller="Carros" asp-action="Cadastrar" method="post" style="min-width: 75vw">
+        <div class="row">
+            <div class="form-group col">
+                <label for="marca">Marca</label>
+                <input type="text" class="form-control" asp-for="Marca" placeholder="Marca do veículo">
+                @Html.ValidationMessageFor(x => x.Marca)
+            </div>
+            <div class="form-group col">
+                <label for="modelo">Modelo</label>
+                <input type="text" class="form-control" asp-for="Modelo" placeholder="Modelo do veículo">
+                @Html.ValidationMessageFor(x => x.Modelo)
+            </div>
+            <div class="form-group col-2">
+                <label for="ano">Ano</label>
+                <input type="number" class="form-control" asp-for="Ano" placeholder="Ano do veículo">
+                @Html.ValidationMessageFor(x => x.Ano)
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="form-group col">
+                <label for="combustivel">Combustível</label>
+                <br/>
+                <select asp-for="Combustivel">
+                    <option value="@CombustivelEnum.ALCOOL">Alcóol</option>
+                    <option value="@CombustivelEnum.GASOLINA">Gasolina</option>
+                    <option value="@CombustivelEnum.FLEX">Flex</option>
+                    <option value="@CombustivelEnum.DIESEL">Diesel</option>
+                    <option value="@CombustivelEnum.GNV">Gás-GNV</option>
+                    <option value="@CombustivelEnum.ELETRICO">Elétrico</option>
+                    <option value="@CombustivelEnum.HIBRIDO">Hibrido</option>
+                </select>
+                @Html.ValidationMessageFor(x => x.Combustivel)
+            </div>
+            <div class="form-group col">
+                <label for="cambio">Câmbio</label>
+                <br />
+                <select asp-for="Cambio">
+                    <option value="@CambioEnum.AUTOMATICO">Automático</option>
+                    <option value="@CambioEnum.CVT">CVT</option>
+                    <option value="@CambioEnum.MANUAL">Manual</option>
+                    <option value="@CambioEnum.SEMIAUTOMATICO">Semi-automático</option>
+                </select>
+                @Html.ValidationMessageFor(x => x.Cambio)
+            </div>
+            <div class="form-group col-2">
+                <label for="estado">Estado</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" asp-for="Estado" id="exampleRadios1" value="@EstadoEnum.NOVO" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                        Novo
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" asp-for="Estado" id="exampleRadios2" value="@EstadoEnum.USADO">
+                    <label class="form-check-label" for="exampleRadios2">
+                        Usado
+                    </label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="form-group col">
+                <label for="carroceria">Carroceria</label>
+                <br />
+                <select asp-for="Carroceria">
+                    <option value="@CarroceriaEnum.BUGGY">Buggy</option>
+                    <option value="@CarroceriaEnum.CONVERSIVEL">Conversível</option>
+                    <option value="@CarroceriaEnum.COUPE">Coupé</option>
+                    <option value="@CarroceriaEnum.CROSSOVER">Crossover</option>
+                    <option value="@CarroceriaEnum.FURGAO">Furgão</option>
+                    <option value="@CarroceriaEnum.HATCH">Hatch</option>
+                    <option value="@CarroceriaEnum.MINIVAN">Minivan</option>
+                    <option value="@CarroceriaEnum.PERUA">Perua</option>
+                    <option value="@CarroceriaEnum.PICAPE">Picape</option>
+                    <option value="@CarroceriaEnum.SEDA">Sedã</option>
+                    <option value="@CarroceriaEnum.SUV">SUV</option>
+                    <option value="@CarroceriaEnum.ULTILITARIO">Ultilitário</option>
+                    <option value="@CarroceriaEnum.VAN">Van</option>
+                </select>
+                @Html.ValidationMessageFor(x => x.Carroceria)
+            </div>
+            <div class="form-group col">
+                <label for="quilometragem">Quilometragem</label>
+                <input type="text" class="form-control" asp-for="Quilometragem" placeholder="Quilometragem do veículo">
+                @Html.ValidationMessageFor(x => x.Quilometragem)
+            </div>
+            <div class="form-group col-2">
+                <label for="cor">Cor</label>
+                <input type="text" class="form-control" asp-for="Cor" placeholder="Cor do veículo">
+                @Html.ValidationMessageFor(x => x.Cor)
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="form-group col-2">
+                <label for="preco">Preço</label>
+                <input type="number" class="form-control" asp-for="Preco" placeholder="Preço do veículo">
+                @Html.ValidationMessageFor(x => x.Preco)
+            </div>
+            <div class="form-group col">
+                <label for="descricao">Descrição</label>
+                <input type="text" class="form-control w-75" asp-for="Descricao" placeholder="Descrição do veículo">
+                @Html.ValidationMessageFor(x => x.Descricao)
+            </div>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary w-100" asp-controller="Carros" asp-action="Cadastrar">Cadastrar</button>
+        <br />
+        <br />  
+        <a class="btn btn-secondary w-100 text-light" role="button" asp-controller="Carros" asp-action="Index">Voltar</a>
+    </form>
+</div>

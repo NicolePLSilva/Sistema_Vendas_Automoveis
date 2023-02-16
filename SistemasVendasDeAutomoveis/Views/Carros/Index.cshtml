@@ -1,20 +1,20 @@
-﻿@model CarroModel
+﻿@model List<CarroModel>
 @{
     ViewData["Title"] = "Carros";
 }
+
 <div id="carrosPagina">
     <div class="row">
-        <div class="col-2 bg-success bg-gradient" id="sideBarFiltros">
-            <div class="text-center bg-dark" id="selecaoFiltros">
+        <div class="col-2 bg-dark bg-gradient" id="sideBarFiltros">
+            <div class=" bg-success bg-gradient" id="selecaoFiltros">
                 <h1>Filtros</h1>
                 <div class="filtros">
                     <label>Marca</label>
-                    <section>
-                    </section>
-                    <option>...</option>
-                    <option>...</option>
-                    <option>...</option>
-
+                    <select>
+                        <option>Nissan</option>
+                        <option>Caoa</option>
+                        <option>...</option>
+                    </select>
                 </div>
                 <div class="filtros">
                     <label>Modelo</label>
@@ -25,198 +25,53 @@
         </div>
 
         <div class="col" id="exibirCards">
-            <div class="row row-cols-1 row-cols-md-4 g-4">
-                <div class="col">
-                    <div class="card text-white bg-dark mb-3 border-success" style="width: 16rem;">
-                        @*<img src="..." class="card-img-top" alt="...">*@
-                        <div class="card-body">
-                            <p class="card-text "><small>CaoaCherry</small></p>
-                            <h5 class="card-title">Tiggo 7 pró</h5>
-                            <p class="card-text"><small class="text-muted">Flex; 1.2 ; Cinza</small></p>
-                        </div>
+            <div class="row row-cols-1 row-cols-md-4 g-4" >
+                @if (Model != null && Model.Any())
+                {
+                    foreach (CarroModel carro in Model)
+                    {
+                        <div class="col" >
+                            <div class="card text-white bg-dark mb-3 border-success" style="width: 16rem;" id="selecoesCards">
+                                @*<img src="..." class="card-img-top" alt="...">*@
+                                <div class="card-body">
+                                    <p class="card-text "><small>@carro.Marca</small></p>
+                                    <h5 class="card-title">@carro.Modelo</h5>
+                                    <p class="card-text"><small class="text-muted">@carro.Descricao</small></p>
+                                </div>
 
-                        <div class="card-body text-end" style="font-size: 13px; border-top: solid 1px green;">
-                            <div class="row ">
-                                <p class="col">Ano</p> <p class="col">2020</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Quilometragem</p> <p class="col">00000<span>KM</span></p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Combustível</p> <p class="col">Flex</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Câmbio</p> <p class="col">Autômatico</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Cor</p> <p class="col">Cinza</p>
+                                <div class="card-body text-end" style="font-size: 13px; border-top: solid 1px green;">
+                                    <div class="row ">
+                                        <p class="col">Ano</p> <p class="col">@carro.Ano</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="col">Quilometragem</p> <p class="col">@carro.Quilometragem<span>KM</span></p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="col">Combustível</p> <p class="col">@carro.Combustivel</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="col">Câmbio</p> <p class="col">@carro.Cambio</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="col">Cor</p> <p class="col">@carro.Cor</p>
+                                    </div>
+                                </div>
+                                <div class="card-body" style="display: flex; justify-content: center; align-items: center; border-top: solid 1px green;">
+                                    <a role="button" href="#" class="btn btn-success w-75 border-dark">Comprar</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body" style="display: flex; justify-content: center; align-items: center; border-top: solid 1px green;">
-                            <a role="button" href="#" class="btn btn-success w-75">Comprar</a>
-                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
+                        <h4>Nenhum Veiculo Encontrado</h4>
                     </div>
-                </div>
+                    
+                }
 
-                <div class="col">
-                    <div class="card text-white bg-dark mb-3 border-success" style="width: 16rem;">
-                        @*<img src="..." class="card-img-top" alt="...">*@
-                        <div class="card-body">
-                            <p class="card-text "><small>CaoaCherry</small></p>
-                            <h5 class="card-title">Tiggo 7 pró</h5>
-                            <p class="card-text"><small class="text-muted">Flex; 1.2 ; Cinza</small></p>
-                        </div>
-
-                        <div class="card-body text-end" style="font-size: 13px; border-top: solid 1px green;">
-                            <div class="row ">
-                                <p class="col">Ano</p> <p class="col">2020</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Quilometragem</p> <p class="col">00000<span>KM</span></p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Combustível</p> <p class="col">Flex</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Câmbio</p> <p class="col">Autômatico</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Cor</p> <p class="col">Cinza</p>
-                            </div>
-                        </div>
-                        <div class="card-body" style="display: flex; justify-content: center; align-items: center; border-top: solid 1px green;">
-                            <a role="button" href="#" class="btn btn-success w-75">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card text-white bg-dark mb-3 border-success" style="width: 16rem;">
-                        @*<img src="..." class="card-img-top" alt="...">*@
-                        <div class="card-body">
-                            <p class="card-text "><small>CaoaCherry</small></p>
-                            <h5 class="card-title">Tiggo 7 pró</h5>
-                            <p class="card-text"><small class="text-muted">Flex; 1.2 ; Cinza</small></p>
-                        </div>
-
-                        <div class="card-body text-end" style="font-size: 13px; border-top: solid 1px green;">
-                            <div class="row ">
-                                <p class="col">Ano</p> <p class="col">2020</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Quilometragem</p> <p class="col">00000<span>KM</span></p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Combustível</p> <p class="col">Flex</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Câmbio</p> <p class="col">Autômatico</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Cor</p> <p class="col">Cinza</p>
-                            </div>
-                        </div>
-                        <div class="card-body" style="display: flex; justify-content: center; align-items: center; border-top: solid 1px green;">
-                            <a role="button" href="#" class="btn btn-success w-75">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card text-white bg-dark mb-3 border-success" style="width: 16rem;">
-                        @*<img src="..." class="card-img-top" alt="...">*@
-                        <div class="card-body">
-                            <p class="card-text "><small>CaoaCherry</small></p>
-                            <h5 class="card-title">Tiggo 7 pró</h5>
-                            <p class="card-text"><small class="text-muted">Flex; 1.2 ; Cinza</small></p>
-                        </div>
-
-                        <div class="card-body text-end" style="font-size: 13px; border-top: solid 1px green;">
-                            <div class="row ">
-                                <p class="col">Ano</p> <p class="col">2020</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Quilometragem</p> <p class="col">00000<span>KM</span></p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Combustível</p> <p class="col">Flex</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Câmbio</p> <p class="col">Autômatico</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Cor</p> <p class="col">Cinza</p>
-                            </div>
-                        </div>
-                        <div class="card-body" style="display: flex; justify-content: center; align-items: center; border-top: solid 1px green;">
-                            <a role="button" href="#" class="btn btn-success w-75">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card text-white bg-dark mb-3 border-success" style="width: 16rem;">
-                        @*<img src="..." class="card-img-top" alt="...">*@
-                        <div class="card-body">
-                            <p class="card-text "><small>CaoaCherry</small></p>
-                            <h5 class="card-title">Tiggo 7 pró</h5>
-                            <p class="card-text"><small class="text-muted">Flex; 1.2 ; Cinza</small></p>
-                        </div>
-
-                        <div class="card-body text-end" style="font-size: 13px; border-top: solid 1px green;">
-                            <div class="row ">
-                                <p class="col">Ano</p> <p class="col">2020</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Quilometragem</p> <p class="col">00000<span>KM</span></p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Combustível</p> <p class="col">Flex</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Câmbio</p> <p class="col">Autômatico</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Cor</p> <p class="col">Cinza</p>
-                            </div>
-                        </div>
-                        <div class="card-body" style="display: flex; justify-content: center; align-items: center; border-top: solid 1px green;">
-                            <a role="button" href="#" class="btn btn-success w-75">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card text-white bg-dark mb-3 border-success" style="width: 16rem;">
-                        @*<img src="..." class="card-img-top" alt="...">*@
-                        <div class="card-body">
-                            <p class="card-text "><small>CaoaCherry</small></p>
-                    <h5 class="card-title">Tiggo 7 pró</h5>
-                            <p class="card-text"><small class="text-muted">Flex; 1.2 ; Cinza</small></p>
-                        </div>
-
-                        <div class="card-body text-end" style="font-size: 13px; border-top: solid 1px green;">
-                            <div class="row ">
-                                <p class="col">Ano</p> <p class="col">2020</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Quilometragem</p> <p class="col">00000<span>KM</span></p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Combustível</p> <p class="col">Flex</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Câmbio</p> <p class="col">Autômatico</p>
-                            </div>
-                            <div class="row">
-                                <p class="col">Cor</p> <p class="col">Cinza</p>
-                            </div>
-                        </div>
-                        <div class="card-body" style="display: flex; justify-content: center; align-items: center; border-top: solid 1px green;">
-                            <a role="button" href="#" class="btn btn-success w-75">Comprar</a>
-                        </div>
-                    </div>
-                </div>
+                
 
             </div>
         </div>

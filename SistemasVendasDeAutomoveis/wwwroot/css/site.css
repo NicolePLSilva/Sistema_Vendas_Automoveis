@@ -60,7 +60,7 @@ footer{
 
 #sideBarFiltros {
     min-height: 100vh;
-    /* padding: 10px; */
+     padding: 10px; 
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -70,9 +70,11 @@ footer{
 
 #selecaoFiltros {
    flex: 1;
-    margin: 2px;
+    /*margin: 2px;*/
     padding: 5px;
     border-radius: 2px;
+    border: solid 2px black;
+    box-shadow: 3px 2px 5px black;
 }
 
 .filtros {
@@ -81,14 +83,30 @@ footer{
 
 #exibirCards {
     padding: 10px;
+   
 }
 
 #selecoesCards {
+    box-shadow: -2px -2px 1px 1px green, 2px 2px 3px 3px black;
+}
+
+#brandNome{
+    text-shadow: -1px -1px 2px blue, 1px 1px 2px black;
+    font-style:italic;
+    font-weight: bolder;
+}
+
+#brandDecoration {
+    text-shadow: -2px -2px 4px white, 2px 2px 4px white;
+    color: midnightblue;
+    font-weight: 900;
+}
+
+.divCentralizada {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-evenly;
-    align-items: stretch;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     padding: 10px;
+    min-height: 90vh;
 }
