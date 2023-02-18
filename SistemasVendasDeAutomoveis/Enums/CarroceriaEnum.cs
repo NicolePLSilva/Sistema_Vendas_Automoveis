@@ -2,18 +2,18 @@
 {
     public enum CarroceriaEnum
     {
-        BUGGY,
-        CONVERSIVEL,
-        COUPE,
-        CROSSOVER,
-        FURGAO,
-        HATCH,
-        MINIVAN,
-        PERUA,
-        PICAPE,
-        SUV,
-        SEDA,
-        ULTILITARIO,
-        VAN
+        BUGGY = 1,
+        CONVERSIVEL = 2,
+        COUPE = 3,
+        CROSSOVER = 4,
+        FURGAO = 5,
+        HATCH = 6,
+        MINIVAN = 7,
+        PERUA = 8,
+        PICAPE = 9,
+        SUV = 10,
+        SEDA = 11,
+        ULTILITARIO = 12,
+        VAN = 13
     }
 }

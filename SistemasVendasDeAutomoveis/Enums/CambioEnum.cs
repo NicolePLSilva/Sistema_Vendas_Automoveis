@@ -2,9 +2,9 @@
 {
     public enum CambioEnum
     {
-        AUTOMATICO,
-        CVT,
-        MANUAL,
-        SEMIAUTOMATICO
+        AUTOMATICO = 1,
+        CVT = 2,
+        MANUAL = 3,
+        SEMIAUTOMATICO = 4
     }
 }

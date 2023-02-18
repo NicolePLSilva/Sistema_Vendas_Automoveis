@@ -2,7 +2,7 @@
 {
     public enum EstadoEnum
     {
-        NOVO,
-        USADO
+        NOVO = 1,
+        USADO = 2
     }
 }

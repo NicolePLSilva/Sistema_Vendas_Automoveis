@@ -1,16 +1,16 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -25,7 +25,7 @@ body {
 
 
 
-footer{
+footer {
     margin-top: auto;
 }
 
@@ -35,32 +35,32 @@ footer{
     min-width: 50vw;
     padding: 40px;
     margin-top: 15px;
-    background-color: var(--bs-blue);
-    background-image: var(--bs-gradient);
+    /*background-color: var(--bs-blue);
+    background-image: var(--bs-gradient);*/
     border-radius: 7px;
     box-shadow: 2px 2px 3px 3px black;
 }
 
 #campoPesquisa {
-    background-color: var(--bs-dark);
+    background-color: white;
     /*border: solid 1px slategrey;*/
 
     border-radius: 5px;
     box-shadow: inset 0px 0px 5px 1px black;
     min-width: inherit;
-    color: white;
+    color: black;
 }
 
 #carrosPagina {
     min-height: 100vh;
     min-width: 88vw;
     margin: 0px;
-   /* background-color: var(--bs-dark);*/
+    /* background-color: var(--bs-dark);*/
 }
 
 #sideBarFiltros {
     min-height: 100vh;
-     padding: 10px; 
+    padding: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -69,7 +69,7 @@ footer{
 }
 
 #selecaoFiltros {
-   flex: 1;
+    flex: 1;
     /*margin: 2px;*/
     padding: 5px;
     border-radius: 2px;
@@ -83,20 +83,19 @@ footer{
 
 #exibirCards {
     padding: 10px;
-   
 }
 
 #selecoesCards {
     box-shadow: -2px -2px 1px 1px green, 2px 2px 3px 3px black;
 }
 
-#brandNome{
+.brandNome {
     text-shadow: -1px -1px 2px blue, 1px 1px 2px black;
-    font-style:italic;
+    font-style: italic;
     font-weight: bolder;
 }
 
-#brandDecoration {
+.brandDecoration {
     text-shadow: -2px -2px 4px white, 2px 2px 4px white;
     color: midnightblue;
     font-weight: 900;
@@ -109,4 +108,14 @@ footer{
     align-items: center;
     padding: 10px;
     min-height: 90vh;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+#textoDescricao {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

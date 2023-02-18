@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-success bg-gradient border-bottom box-shadow ">
             <div class="container-fluid">
-                <a class="navbar-brand" id="brandNome" asp-area="" asp-controller="Home" asp-action="Index">Auto<span id="brandDecoration">NOVOS</span></a>
+                <a class="navbar-brand brandNome" asp-area="" asp-controller="Home" asp-action="Index">Auto<span class="brandDecoration">NOVOS</span></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Entrar*</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Carros" asp-action="Cadastrar">Cadastrar Veiculos</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Carros" asp-action="Cadastrar">Cadastrar</a>
                         </li>
                     </ul>
                 </div>
@@ -56,6 +56,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -19,19 +19,42 @@ namespace SistemasVendasDeAutomoveis.Controllers
             return View(carros);
         }
 
+        public IActionResult Detalhes(int id)
+        {
+            CarroModel carro = _carroRepositorio.BuscarPorId(id);
+            return View(carro);
+        }
+
         public IActionResult Cadastrar()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(CarroModel carroModel)
+        public IActionResult Cadastrar(CarroInputModel carroModel)
         {
             try
             {
+                CarroModel carro = null;
+
                 if (ModelState.IsValid)
                 {
-                    _carroRepositorio.Adicionar(carroModel);
+                    carro = new CarroModel()
+                    {
+                        Marca = carroModel.Marca,
+                        Modelo = carroModel.Modelo,
+                        Descricao = carroModel.Descricao,
+                        Ano = carroModel.Ano,
+                        Cor = carroModel.Cor,
+                        Estado = carroModel.Estado,
+                        Carroceria = carroModel.Carroceria,
+                        Cambio = carroModel.Cambio,
+                        Combustivel = carroModel.Combustivel,
+                        Quilometragem = carroModel.QuilometragemParaInt(carroModel.Quilometragem),
+                        Preco = carroModel.PrecoParaDecimal(carroModel.Preco)
+                    };
+
+                    _carroRepositorio.Adicionar(carro);
                     TempData["MensagemSucesso"] = "Veículo cadastrado com sucesso!";
                     return RedirectToAction("Index");
                 }

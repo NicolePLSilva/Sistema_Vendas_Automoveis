@@ -9,6 +9,7 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<BancoContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
 builder.Services.AddScoped<ICarroRepositorio, CarroRepositorio>();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,6 +26,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
