@@ -29,5 +29,11 @@ namespace SistemasVendasDeAutomoveis.Repositorios
             return carro;
         }
 
+        public bool Remover(CarroModel carro)
+        {
+            _context.Carros.Remove(carro);
+            _context.SaveChanges();
+            return true;
+        }
     }
 }

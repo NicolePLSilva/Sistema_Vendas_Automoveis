@@ -7,13 +7,22 @@ $(document).ready(function () {
     $("#select-estado").on("change", function () {
         
         if ($(this).val() === "NOVO") {
-            $(".campoKM").prop("disabled", true).val(0 + " KM");
-        } else if ($(this).val() === "")
+            $(".campoKM").prop("readonly", true).val('Carro 0 KM');
+        } else if ($(this).val() === "USADO")
         {
-            $(".campoKM").prop("disabled", true).val("Selecione o estado do veículo");
+            $(".campoKM").prop("readonly", false).val('000.000.000');
         }
         else {
-            $(".campoKM").prop("disabled", false).val('000.000.000');
+            $(".campoKM").prop("readonly", true).val("Selecione o estado do veículo");
         }
     });
+});
+
+$('.close').click(function () {
+    $('.alert').hide('hide');
+    $('.modal').hide('hide');
+});
+
+$('#excluirVeiculo').click(function () {
+    $('.modal-excluir').show('show');
 });

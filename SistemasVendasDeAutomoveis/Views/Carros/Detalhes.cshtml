@@ -1,100 +1,161 @@
 ﻿@using SistemasVendasDeAutomoveis.Enums
 @model CarroModel
 @{
-    ViewData["Title"] = Model.Marca +" "+ Model.Modelo+ " Detalhes";
+    ViewData["Title"] = Model.Marca + " " + Model.Modelo + " Detalhes";
 }
-<div class="container mt-5 mb-5">
-    <div class="row d-flex justify-content-center border bg-success" style="padding:7px; box-shadow:0px 0px 4px 2px black">
+
+<div class="container-xl mt-5 mb-5">
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success alert-fechar" role="alert">
+            <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger alert-fechar" role="alert">
+            <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+    <div class="d-flex justify-content-end">
+        <a role="button" class="btn btn-primary mx-lg-4" asp-route-id="@Model.Id" asp-action="Index" asp-controller="Carros"><small>Editar</small></a>
+        <a role="button" class="btn btn-danger mx-lg-4" id="excluirVeiculo"><small>Excluir</small></a>
+    </div>
+    <br />
+    <div class="row d-flex justify-content-center border bg-light" style="padding:7px; box-shadow:0px 0px 4px 2px black">
         <div class="col-md-6">
-            <div class="card bg-body">
+            <div class="card bg-light">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgwAAAGQCAYAAADCyjiqAAAAAXNSR0IArs4c6QAAIABJREFUeF7t3Wez7Ea1BuBtkskm52AK+M7//yuGIuccTAbfegfaV8iSlmbvtVPvZ6pOnXtxn57pZ7VarzQa6ZVvfetbb914ESBAgAABAgQOBF4RGMwPAgQIECBAoBIQGCoh/50AAQIECBC4ERhMAgIECBAgQKAUEBhKIg0IECBAgAABgcEcIECAAAECBEoBgaEk0oAAAQIECBAQGMwBAgQIECBAoBQQGEoiDQgQIECAAAGBwRwgQIAAAQIESgGBoSTSgAABAgQIEBAYzAECBAgQIECgFBAYSiINCBAgQIAAAYHBHCBAgAABAgRKAYGhJNKAAAECBAgQEBjMAQIECBAgQKAUEBhKIg0IECBAgAABgcEcIECAAAECBEoBgaEk0oAAAQIECBAQGMwBAgQIECBAoBQQGEoiDQgQIECAAAGBwRwgQIAAAQIESgGBoSTSgAABAgQIEBAYzAECBAgQIECgFBAYSiINCBAgQIAAAYHBHCBAgAABAgRKAYGhJNKAAAECBAgQEBjMAQIECBAgQKAUEBhKIg0IECBAgAABgcEcIECAAAECBEoBgaEk0oAAAQIECBAQGMwBAgQIECBAoBQQGEoiDQgQIECAAAGBwRwgQIAAAQIESgGBoSTSgAABAgQIEBAYzAECBAgQIECgFBAYSiINCBAgQIAAAYHBHCBAgAABAgRKAYGhJNKAAAECBAgQEBjMAQIECBAgQKAUEBhKIg0IECBAgAABgcEcIECAAAECBEoBgaEk0oAAAQIECBAQGMwBAgQIECBAoBQQGEoiDQgQIECAAAGBwRwgQIAAAQIESgGBoSTSgAABAgQIEBAYzAECBAgQIECgFBAYSiINCBAgQIAAAYHBHCBAgAABAgRKAYGhJNKAAAECBAgQEBjMAQIECBAgQKAUEBhKIg0IECBAgAABgcEcIECAAAECBEoBgaEk0oAAAQIECBAQGMwBAgQIECBAoBQQGEoiDQgQIECAAAGBwRwgQIAAAQIESgGBoSTSgAABAgQIEBAYzAECBAgQIECgFBAYSiINCBAgQIAAAYHBHCBAgAABAgRKAYGhJNKAAAECBAgQEBjMAQIECBAgQKAUEBhKIg0IECBAgAABgcEcIECAAAECBEoBgaEk0oAAAQIECBAQGMwBAgQIECBAoBQQGEoiDQgQIECAAAGBwRwgQIAAAQIESgGBoSTSgAABAgQIEBAYzAECBAgQIECgFBAYSiINCBAgQIAAAYHBHCBAgAABAgRKAYGhJNKAAAECBAgQEBjMAQIECBAgQKAUEBhKIg0IECBAgAABgcEcIECAAAECBEoBgaEk0oAAAQIECBAQGMwBAgQIECBAoBQQGEoiDQgQIECAAAGBwRwgQIAAAQIESgGBoSTSgAABAgQIEBAYzAECBAgQIECgFBAYSiINCBAgQIAAAYHBHCBAgAABAgRKAYGhJNKAAAECBAgQEBjMAQIECBAgQKAUEBhKIg0IECBAgAABgcEcIECAAAECBEoBgaEk0oAAAQIECBAQGMwBAgQIECBAoBQQGEoiDQgQIECAAAGBwRwgQIAAAQIESgGBoSTSgAABAgQIEBAYzAECBAgQIECgFBAYSiINCBAgQIAAAYHBHCBAgAABAgRKAYGhJNKAAAECBAgQEBjMAQIECBAgQKAUEBhKIg0IECBAgAABgcEcIECAAAECBEoBgaEk0oAAAQIECBAQGMwBAgQIECBAoBQQGEoiDQgQIECAAAGBwRwgQIAAAQIESgGBoSTSgAABAgQIEBAYzAECBAgQIECgFBAYSiINCBAgQIAAAYHBHCBAgAABAgRKAYGhJNKAAAECBAgQEBjMAQIECBAgQKAUEBhKIg0IECBAgAABgcEcIECAAAECBEoBgaEk0oAAAQIECBAQGMwBAgQIECBAoBQQGEoiDQgQIECAAAGBwRwgQIAAAQIESgGBoSTSgAABAgQIEBAYzAECBAgQIECgFBAYSiINCBAgQIAAAYHBHCBAgAABAgRKAYGhJNKAAAECBAgQEBjMAQIECBAgQKAUEBhKIg0IECBAgAABgcEcIECAAAECBEoBgaEk0oAAAQIECBAQGMwBAgQIECBAoBQQGEoiDQgQIECAAAGBwRwgQIAAAQIESgGBoSTSgAABAgQIEBAYzAECBAgQIECgFBAYSiINCBAgQIAAAYHBHCBAgAABAgRKAYGhJNKAAAECBAgQEBjMAQIECBAgQKAUEBhKIg0IECBAgAABgcEcIECAAAECBEoBgaEk0oAAAQIECBAQGMwBAgQIECBAoBQQGEoiDQgQIECAAAGBwRwgQIAAAQIESgGBoSTSgAABAgQI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" class="card-img-top" alt="...">
-                <div class="card-text"><small class="text-muted">Descrição: @Model.Descricao</small></div>
+                <div class="card-text lead text-dark" style="min-height:70px">
+                    <small>Descrição: @Model.Descricao</small>
+                </div>
             </div>
         </div>
         <div class="col-md-6 ">
-            
+
             <div class="mt-4 mb-3">
-                
-                <h3 class="text-uppercase">@Model.Marca @Model.Modelo @Model.Ano</h3>
-                <div class="card-body font-monospace fw-bolder fs-5">
-                    <div class="card-text ">Tipo 
-                        @if (Model.Carroceria == CarroceriaEnum.COUPE)
-                        {
-                            <span>COUPÉ</span>
-                        }
-                        else if(Model.Carroceria == CarroceriaEnum.SEDA)
-                        {
-                            <span>SEDÃ</span>
-                        }
-                        else if(Model.Carroceria == CarroceriaEnum.FURGAO)
-                        {
-                            <span>FURGÃO</span>
-                        }
-                        else if (Model.Carroceria == CarroceriaEnum.CONVERSIVEL)
-                        {
-                            <span>CONVERSÍVEL</span>
-                        }
-                        else if (Model.Carroceria == CarroceriaEnum.ULTILITARIO)
-                        {
-                            <span>UTILITÁRIO</span>
-                        }
-                        else
-                        {
-                            <span>@Model.Carroceria</span>
-                        }
+                <small class="text-muted"><b>@Model.Marca</b></small>
+                <h3 class="text-uppercase display-6 text-success"><b><i>@Model.Modelo <span class="fs-5">@Model.Ano</span></i></b></h3>
+                <div class="card text-dark border-dark">
+                    <div class="card-header bg-success text-light fs-6">Ficha</div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">Tipo da carroceria:</dt>
+                            <dd class="col-sm-8">
+                                @if (Model.Carroceria == CarroceriaEnum.COUPE)
+                                {
+                                    <span>COUPÉ</span>
+                                }
+                                else if (Model.Carroceria == CarroceriaEnum.SEDA)
+                                {
+                                    <span>SEDÃ</span>
+                                }
+                                else if (Model.Carroceria == CarroceriaEnum.FURGAO)
+                                {
+                                    <span>FURGÃO</span>
+                                }
+                                else if (Model.Carroceria == CarroceriaEnum.CONVERSIVEL)
+                                {
+                                    <span>CONVERSÍVEL</span>
+                                }
+                                else if (Model.Carroceria == CarroceriaEnum.ULTILITARIO)
+                                {
+                                    <span>UTILITÁRIO</span>
+                                }
+                                else
+                                {
+                                    <span>@Model.Carroceria</span>
+                                }
+                            </dd>
+
+                            <dt class="col-sm-4">Transmissão:</dt>
+                            <dd class="col-sm-8">
+                                @if (@Model.Cambio == CambioEnum.AUTOMATICO)
+                                {
+                                    <span>AUTOMÁTICO</span>
+                                }
+                                else if (@Model.Cambio == CambioEnum.SEMIAUTOMATICO)
+                                {
+                                    <span>SEMI-AUTOMÁTICO</span>
+                                }
+                                else
+                                {
+                                    <span>@Model.Cambio</span>
+                                }
+                            </dd>
+
+                            <dt class="col-sm-4">Combustível:</dt>
+                            <dd class="col-sm-8">
+                                @if (Model.Combustivel == CombustivelEnum.ALCOOL)
+                                {
+                                    <span>ÁLCOOL</span>
+                                }
+                                else if (Model.Combustivel == CombustivelEnum.HIBRIDO)
+                                {
+                                    <span>HÍBRIDO</span>
+                                }
+                                else if (Model.Combustivel == CombustivelEnum.ELETRICO)
+                                {
+                                    <span>ELÉTRICO</span>
+                                }
+                                else
+                                {
+                                    <span>@Model.Combustivel</span>
+                                }
+                            </dd>
+
+                            <dt class="col-sm-4 ">Cor do veículo:</dt>
+                            <dd class="col-sm-8">@Model.Cor</dd>
+
+
+                            <dt class="col-sm-4">Estado do veículo:</dt>
+                            <dd class="col-sm-8">
+                                @if (Model.Estado == EstadoEnum.NOVO)
+                                {
+                                    <span>NOVO - Veículo Zero KM</span>
+                                }
+                                else
+                                {
+                                    <span>USADO - @Model.Quilometragem KM rodados</span>
+                                }
+                            </dd>
+                            <dt class="col-sm-4">Preço:</dt>
+                            <dd class="col-sm-8">R$@Model.Preco</dd>
+                        </dl>
+                        <div class="d-flex align-items-center justify-content-center text-center">
+                            <a role="button" class="btn btn-success bg-gradient w-75 text-uppercase"
+                               style="min-height:60px; padding: 1.5rem; box-shadow: 2px 2px 3px 2px black">
+                                <b>Comprar</b>
+                            </a>
+                        </div>
                     </div>
-                    <br/>
-                    <div class="card-text">Câmbio 
-                        @if (@Model.Cambio == CambioEnum.AUTOMATICO)
-                        {
-                            <span>AUTOMÁTICO</span>
-                        }
-                        else if (@Model.Cambio == CambioEnum.SEMIAUTOMATICO)
-                        {
-                            <span>SEMI-AUTOMÁTICO</span>
-                        }
-                        else
-                        {
-                            <span>@Model.Cambio</span>
-                        }
-                    </div>
-                    <br />
-                    <div class="card-text ">Combustível
-                        @if(Model.Combustivel == CombustivelEnum.ALCOOL)
-                        {
-                            <span>ÁLCOOL</span>
-                        }
-                        else if(Model.Combustivel == CombustivelEnum.HIBRIDO)
-                        {
-                            <span>HÍBRIDO</span>
-                        }
-                        else if (Model.Combustivel == CombustivelEnum.ELETRICO)
-                        {
-                            <span>ELÉTRICO</span>
-                        }
-                        else
-                        {
-                            <span>@Model.Combustivel</span>
-                        }
-                    </div>
-                    <div class="card-text">Cor: @Model.Cor</div>
-                    @if(Model.Estado == EstadoEnum.NOVO)
-                    {
-                        <div class="card-text">Estado: NOVO</div>
-                        <div class="card-text">Veículo Zero KM</div>
-                    }
-                    else
-                    {
-                        <div class="card-text">Estado: USADO</div>
-                        <div class="card-text">@Model.Quilometragem KM rodados</div>
-                    }
-                    
-                    <div class="card-text act-price text-center">R$@Model.Preco</div>
                 </div>
+
             </div>
-            
+
         </div>
 
     </div>
-    <small class="text-black">Voltar</small>
+    <br />
+    <a role="button" class="btn btn-outline-light" asp-action="Index" asp-controller="Carros"><small>Ver outros veículos</small></a>
+</div>
+
+<div class="modal modal-excluir bg-dark bg-opacity-75" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-dark border-danger">
+            <div class="modal-header">
+                <h5 class="modal-title">Deseja realmente excluir este veículo?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <a role="button" class="btn btn-danger" asp-controller="Carros" asp-action="Excluir">Prosseguir com a exclusão</a>
+            </div>
+        </div>
+    </div>
 </div>

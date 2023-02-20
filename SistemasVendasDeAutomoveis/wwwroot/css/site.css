@@ -19,7 +19,7 @@ body {
     flex-direction: column;
     min-height: 95vh;
     background-color: var(--bs-dark);
-    background-image: var(--bs-gradient);
+    /*background-image: var(--bs-gradient);*/
     color: white;
 }
 
@@ -86,7 +86,7 @@ footer {
 }
 
 #selecoesCards {
-    box-shadow: -2px -2px 1px 1px green, 2px 2px 3px 3px black;
+    box-shadow: 1px 1px 4px 2px black;
 }
 
 .brandNome {
@@ -118,4 +118,25 @@ footer {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.alert-fechar{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: row;
+    text-align:center;
+}
+
+.btn-fechar {
+    box-shadow: 0px 0px 3px 2px black;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    border-radius: 3px;
+    font-size: xx-small;
+}
+
+.bg-dark-persornalizado{
+    background-color: var(--bs-dark);
 }

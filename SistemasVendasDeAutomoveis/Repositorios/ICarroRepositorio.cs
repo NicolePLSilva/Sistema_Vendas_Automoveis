@@ -10,6 +10,8 @@ namespace SistemasVendasDeAutomoveis.Repositorios
         CarroModel BuscarPorId(int id);
 
         CarroModel Adicionar(CarroModel carro);
+        
+        CarroModel Remover(CarroModel carro);
 
 
     }

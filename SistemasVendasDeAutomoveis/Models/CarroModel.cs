@@ -18,7 +18,7 @@ namespace SistemasVendasDeAutomoveis.Models
         public string Modelo { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        public int? Ano { get; set; }
+        public int Ano { get; set; }
 
         public string? Descricao { get; set; } = " ";
 
@@ -30,13 +30,13 @@ namespace SistemasVendasDeAutomoveis.Models
         public EstadoEnum Estado { get; set; }
 
         [Required(ErrorMessage = "Selecione uma opção")]
-        public CombustivelEnum? Combustivel { get; set; }
+        public CombustivelEnum Combustivel { get; set; }
 
         [Required(ErrorMessage = "Selecione uma opção")]
-        public CambioEnum? Cambio { get; set; }
+        public CambioEnum Cambio { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        public CarroceriaEnum? Carroceria { get; set; }
+        public CarroceriaEnum Carroceria { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [StringLength(11, ErrorMessage = "Excedeu número máximo de caracteres")]
@@ -45,7 +45,7 @@ namespace SistemasVendasDeAutomoveis.Models
         [Required(ErrorMessage = "Campo obrigatório")]
         [StringLength(14, ErrorMessage = "Excedeu número máximo de caracteres")]
         [DisplayName("Preço do veículo")]
-        public decimal? Preco { get; set; }
+        public decimal Preco { get; set; }
         
 
         

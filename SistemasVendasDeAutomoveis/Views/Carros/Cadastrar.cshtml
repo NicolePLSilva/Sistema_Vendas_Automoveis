@@ -104,11 +104,10 @@
             <div class="form-group col">
                 <label for="quilometragem">Quilometragem</label>
                 <input type="text" class="form-control campoKM"
-                       asp-for="Quilometragem" disabled
+                       asp-for="Quilometragem" readonly
                        placeholder="Selecione o estado do veículo"
-                       data-mask="###.###.###" data-mask-reverse="true">
+                       data-mask="0##.###.##0" data-mask-reverse="true">
                 @Html.ValidationMessageFor(x => x.Quilometragem)
-
             </div>
             <div class="form-group col">
                 <label for="cor">Cor</label>

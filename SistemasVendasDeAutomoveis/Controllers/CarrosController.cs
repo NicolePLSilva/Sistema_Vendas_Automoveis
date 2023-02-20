@@ -30,6 +30,18 @@ namespace SistemasVendasDeAutomoveis.Controllers
             return View();
         }
 
+        public IActionResult ConfirmarExclusão(int id)
+        {
+            CarroModel carro = _carroRepositorio.BuscarPorId(id);
+            return View(carro);
+        }
+
+        public IActionResult Excluir(CarroModel carroModel)
+        {
+            _carroRepositorio.Remover(carroModel);
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public IActionResult Cadastrar(CarroInputModel carroModel)
         {
@@ -39,24 +51,33 @@ namespace SistemasVendasDeAutomoveis.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    carro = new CarroModel()
+                    if (carroModel.Estado != null && carroModel.Cambio != null && carroModel.Combustivel != null &&
+                        carroModel.Ano != null && carroModel.Carroceria != null && carroModel.Preco != null)
                     {
-                        Marca = carroModel.Marca,
-                        Modelo = carroModel.Modelo,
-                        Descricao = carroModel.Descricao,
-                        Ano = carroModel.Ano,
-                        Cor = carroModel.Cor,
-                        Estado = carroModel.Estado,
-                        Carroceria = carroModel.Carroceria,
-                        Cambio = carroModel.Cambio,
-                        Combustivel = carroModel.Combustivel,
-                        Quilometragem = carroModel.QuilometragemParaInt(carroModel.Quilometragem),
-                        Preco = carroModel.PrecoParaDecimal(carroModel.Preco)
-                    };
+                        carro = new CarroModel()
+                        {
+                            Marca = carroModel.Marca,
+                            Modelo = carroModel.Modelo,
+                            Descricao = carroModel.Descricao,
+                            Ano = carroModel.Ano ?? throw new Exception(),
+                            Cor = carroModel.Cor,
+                            Estado = carroModel.Estado ?? throw new Exception(),
+                            Cambio = carroModel.Cambio ?? throw new Exception(),
+                            Combustivel = carroModel.Combustivel ?? throw new Exception(),
+                            Carroceria = carroModel.Carroceria ?? throw new Exception(),
+                            Quilometragem = carroModel.QuilometragemParaInt(carroModel.Quilometragem),
+                            Preco = carroModel.PrecoParaDecimal(carroModel.Preco)
+                        };
 
-                    _carroRepositorio.Adicionar(carro);
-                    TempData["MensagemSucesso"] = "Veículo cadastrado com sucesso!";
+                        _carroRepositorio.Adicionar(carro);
+                        TempData["MensagemSucesso"] = "Veículo cadastrado com sucesso!";
+                        return RedirectToAction("Detalhes", carro);
+                    }
+
+                    TempData["MensagemErro"] = $"Ops, um erro inesperado aconteceu! Não conseguimos cadastrar o veículo!" +
+                        $"Por favor, tente novamente.";
                     return RedirectToAction("Index");
+
                 }
 
                 return View(carroModel);
