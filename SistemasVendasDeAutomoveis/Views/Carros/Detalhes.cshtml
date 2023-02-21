@@ -21,7 +21,8 @@
         </div>
     }
     <div class="d-flex justify-content-end">
-        <a role="button" class="btn btn-primary mx-lg-4" asp-route-id="@Model.Id" asp-action="Index" asp-controller="Carros"><small>Editar</small></a>
+       <input type="hidden" asp-for="Id"/>
+        <a role="button" class="btn btn-primary mx-lg-4" asp-route-id="@Model.Id" asp-action="Editar" asp-controller="Carros"><small>Editar</small></a>
         <a role="button" class="btn btn-danger mx-lg-4" id="excluirVeiculo"><small>Excluir</small></a>
     </div>
     <br />
@@ -153,8 +154,9 @@
                 </button>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <a role="button" class="btn btn-danger" asp-controller="Carros" asp-action="Excluir">Prosseguir com a exclusão</a>
+                <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cancelar</button>
+                <a role="button" class="btn btn-danger" asp-route-id="@Model.Id"
+                asp-controller="Carros" asp-action="Excluir">Prosseguir com a exclusão</a>
             </div>
         </div>
     </div>

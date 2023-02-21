@@ -1,0 +1,148 @@
+﻿@using SistemasVendasDeAutomoveis.Enums
+@model CarroModel
+@{
+    ViewData["Title"] = "Editar Veículo";
+}
+<div class="text-center bg-dark">
+    <H1 class="display-1">Atualizar</H1>
+</div>
+<div class="divCentralizada bg-dark ">
+
+    <form asp-controller="Carros" asp-action="Editar" method="post" style="min-width: 75vw">
+        <input type="hidden" asp-for="Id"/>
+        <div class="row">
+            <div class="form-group col">
+                <label for="marca">Marca</label>
+                <input type="text" class="form-control" asp-for="Marca" placeholder="Marca do veículo">
+                @Html.ValidationMessageFor(x => x.Marca)
+            </div>
+            <div class="form-group col">
+                <label for="modelo">Modelo</label>
+                <input type="text" class="form-control" asp-for="Modelo" placeholder="Modelo do veículo">
+                @Html.ValidationMessageFor(x => x.Modelo)
+            </div>
+            <div class="form-group col-2">
+                <label for="ano">Ano</label>
+                <select asp-for="Ano">
+                    <option value="">Selecione o ano</option>
+                    @for (int ano = DateTime.Now.Year; ano > 1985; ano--)
+                    {
+                        <option value="@ano">@ano</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(x => x.Ano)
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="form-group col">
+                <label for="carroceria">Carroceria</label>
+                <br />
+                <select asp-for="Carroceria">
+                    <option value="">Selecione</option>
+                    <option value="@CarroceriaEnum.BUGGY">Buggy</option>
+                    <option value="@CarroceriaEnum.CONVERSIVEL">Conversível</option>
+                    <option value="@CarroceriaEnum.COUPE">Coupé</option>
+                    <option value="@CarroceriaEnum.CROSSOVER">Crossover</option>
+                    <option value="@CarroceriaEnum.FURGAO">Furgão</option>
+                    <option value="@CarroceriaEnum.HATCH">Hatch</option>
+                    <option value="@CarroceriaEnum.MINIVAN">Minivan</option>
+                    <option value="@CarroceriaEnum.PERUA">Perua</option>
+                    <option value="@CarroceriaEnum.PICAPE">Picape</option>
+                    <option value="@CarroceriaEnum.SEDA">Sedã</option>
+                    <option value="@CarroceriaEnum.SUV">SUV</option>
+                    <option value="@CarroceriaEnum.ULTILITARIO">Utilitário</option>
+                    <option value="@CarroceriaEnum.VAN">Van</option>
+                </select>
+                <br />
+                @Html.ValidationMessageFor(x => x.Carroceria)
+            </div>
+            <div class="form-group col">
+                <label for="combustivel">Combustível</label>
+                <br />
+                <select asp-for="Combustivel">
+                    <option value="">Selecione</option>
+                    <option value="@CombustivelEnum.ALCOOL">Álcool</option>
+                    <option value="@CombustivelEnum.GASOLINA">Gasolina</option>
+                    <option value="@CombustivelEnum.FLEX">Flex</option>
+                    <option value="@CombustivelEnum.DIESEL">Diesel</option>
+                    <option value="@CombustivelEnum.GNV">Gás-GNV</option>
+                    <option value="@CombustivelEnum.ELETRICO">Elétrico</option>
+                    <option value="@CombustivelEnum.HIBRIDO">Híbrido</option>
+                </select>
+                <br />
+                @Html.ValidationMessageFor(x => x.Combustivel)
+            </div>
+            <div class="form-group col">
+                <label for="cambio">Câmbio</label>
+                <br />
+                <select asp-for="Cambio">
+                    <option value="">Selecione</option>
+                    <option value="@CambioEnum.AUTOMATICO">Automático</option>
+                    <option value="@CambioEnum.CVT">CVT</option>
+                    <option value="@CambioEnum.MANUAL">Manual</option>
+                    <option value="@CambioEnum.SEMIAUTOMATICO">Semi-automático</option>
+                </select>
+                <br />
+                @Html.ValidationMessageFor(x => x.Cambio)
+            </div>
+            <div class="form-group col">
+                <label for="estado">Estado</label>
+                <br />
+                <select asp-for="Estado" id="select-estado">
+                    <option value="">Selecione</option>
+                    <option value="@EstadoEnum.NOVO">Novo</option>
+                    <option value="@EstadoEnum.USADO">Usado</option>
+                </select>
+                <br />
+                @Html.ValidationMessageFor(x => x.Estado)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+
+            <div class="form-group col">
+                <label for="quilometragem">Quilometragem</label>
+                <input type="text" class="form-control campoKM"
+                       asp-for="Quilometragem" readonly
+                       placeholder="Selecione o estado do veículo"
+                       data-mask="0##.###.##0" data-mask-reverse="true">
+                @Html.ValidationMessageFor(x => x.Quilometragem)
+            </div>
+            <div class="form-group col">
+                <label for="cor">Cor</label>
+                <input type="text" class="form-control" asp-for="Cor" placeholder="Cor do veículo">
+                @Html.ValidationMessageFor(x => x.Cor)
+            </div>
+
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="form-group col">
+                <label for="preco">Preço</label>
+                <br />
+                <div class="row">
+                    <button class="col-1 btn btn-success" disabled>R$</button>
+                    <input type="text" class="form-control preco col" asp-for="Preco"
+                           placeholder="Preço do veículo"
+                           data-mask="###.###.###,##" data-mask-reverse="true">
+                    @Html.ValidationMessageFor(x => x.Preco)
+                </div>
+
+
+            </div>
+            <div class="form-group col">
+                <label for="descricao">Descrição</label>
+                <input type="text" class="form-control w-75" asp-for="Descricao" placeholder="Descrição do veículo">
+                @Html.ValidationMessageFor(x => x.Descricao)
+            </div>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary w-100">Atualizar</button>
+        <br />
+        <br />
+        <a class="btn btn-secondary w-100 text-light" role="button" asp-route-id="@Model.Id" asp-controller="Carros" asp-action="Detalhes">Voltar</a>
+    </form>
+</div>

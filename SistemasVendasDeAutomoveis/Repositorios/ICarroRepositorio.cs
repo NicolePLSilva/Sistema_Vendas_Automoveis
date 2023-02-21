@@ -11,8 +11,8 @@ namespace SistemasVendasDeAutomoveis.Repositorios
 
         CarroModel Adicionar(CarroModel carro);
         
-        CarroModel Remover(CarroModel carro);
+        bool Remover(int id);
 
-
+        CarroModel Alterar(CarroModel carro);
     }
 }
