@@ -11,5 +11,7 @@ namespace SistemasVendasDeAutomoveis.Data
         }
 
         public DbSet<CarroModel> Carros { get; set; }
+
+        public DbSet<UsuarioModel> Usuarios { get; set; }
     }
 }

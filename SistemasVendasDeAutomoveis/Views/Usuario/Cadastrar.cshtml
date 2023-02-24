@@ -1,0 +1,101 @@
+﻿@using SistemasVendasDeAutomoveis.Enums
+@model UsuarioModel
+@{
+    ViewData["Title"] = "Cadastrar Usuário";
+}
+<div class="text-center bg-dark">
+    <H1 class="display-1">Cadastrar</H1>
+</div>
+<div class="divCentralizada bg-dark ">
+
+    <form asp-controller="Usuario" asp-action="Cadastrar" method="post" style="min-width: 75vw">
+        <div class="row">
+            <div class="form-group col">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" asp-for="Nome" placeholder="Primeiro Nome">
+                @Html.ValidationMessageFor(x => x.Nome)
+            </div>
+            <div class="form-group col">
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" class="form-control" asp-for="Sobrenome" placeholder="Último Sobrenome">
+                @Html.ValidationMessageFor(x => x.Sobrenome)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col">
+                <label for="cpf">CPF</label>
+                <input type="text" class="form-control" asp-for="CPF" placeholder="CPF"
+                       data-mask="000.000.000-00">
+                @Html.ValidationMessageFor(x => x.CPF)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col">
+                <label for="estado">Estado</label>
+                <input type="text" class="form-control" asp-for="Estado" placeholder="Estado">
+                @Html.ValidationMessageFor(x => x.Estado)
+            </div>
+            <div class="form-group col">
+                <label for="cidade">Cidade</label>
+                <input type="text" class="form-control" asp-for="Cidade" placeholder="Cidade">
+                @Html.ValidationMessageFor(x => x.Cidade)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col">
+                <label for="endereco">Endereço</label>
+                <input type="text" class="form-control" asp-for="Endereco" placeholder="Rua, Bairro, nº">
+                @Html.ValidationMessageFor(x => x.Endereco)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col">
+                <label for="perfil">Perfil</label>
+                <br />
+                <select asp-for="Perfil">
+                    <option value="">Selecione</option>
+                    <option value="@PerfilEnum.ADMIN">Administrador</option>
+                    <option value="@PerfilEnum.USER">Usuário</option>
+                </select>
+                <br />
+                @Html.ValidationMessageFor(x => x.Perfil)
+            </div>
+            <div class="form-group col-1">
+                <input type="checkbox" asp-for="IsAnunciante"/>
+                <label for="anunciante">Anunciante?</label>
+                @Html.ValidationMessageFor(x => x.IsAnunciante)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col">
+                <label for="email">E-mail</label>
+                <input type="text" class="form-control" asp-for="Email" placeholder="Endereço de E-mail">
+                @Html.ValidationMessageFor(x => x.Email)
+            </div>
+            <div class="form-group col">
+                <label for="celular">Celular</label>
+                <input type="text" class="form-control" asp-for="Celular" placeholder="Número de contato"
+                       data-mask="(00) 00000-0000">
+                @Html.ValidationMessageFor(x => x.Celular)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col">
+                <label for="senha">Senha</label>
+                <input type="password" class="form-control" asp-for="Senha">
+                @Html.ValidationMessageFor(x => x.Senha)
+            </div>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary w-100" asp-controller="Usuario" asp-action="Cadastrar">Cadastrar</button>
+        <br />
+        <br />
+        <a class="btn btn-secondary w-100 text-light" role="button" asp-controller="Usuario" asp-action="Index">Voltar</a>
+    </form>
+</div>

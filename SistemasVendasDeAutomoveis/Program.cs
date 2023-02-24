@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SistemasVendasDeAutomoveis.Data;
+using SistemasVendasDeAutomoveis.Helper;
 using SistemasVendasDeAutomoveis.Repositorios;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<BancoContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
 builder.Services.AddScoped<ICarroRepositorio, CarroRepositorio>();
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+builder.Services.AddScoped<ISessao, Sessao>();
 
 
 var app = builder.Build();

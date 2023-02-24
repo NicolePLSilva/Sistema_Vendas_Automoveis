@@ -1,0 +1,64 @@
+﻿@model List<UsuarioModel>
+@{
+    ViewData["Title"] = "Usuários cadastrados";
+}
+
+@if (TempData["MensagemSucesso"] != null)
+{
+<div class="alert alert-success alert-fechar" role="alert">
+    <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
+    @TempData["MensagemSucesso"]
+</div>
+}
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger alert-fechar" role="alert">
+        <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
+        @TempData["MensagemErro"]
+    </div>
+}
+
+<div class="container text-center">
+
+    <h5 class="display-5">Usuários Cadastrados</h5>
+    <br/>
+    <div class="d-flex">
+        <a role="button" class="btn btn-primary" asp-controller="Usuario" asp-action="Cadastrar">Cadastrar Usuário</a>
+    </div>
+    <br />  
+    <table class="table table-light table-hover table-sm table-striped table-bordered border-success">
+        <thead class="text-success">
+            <tr class="bg-success">
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Celular</th>
+                <th scope="col" class="col-2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach(UsuarioModel usuario in Model)
+                {
+                    <tr>
+                        <th scope="row" class="text-success ">@usuario.Id</th>
+                        <td>@usuario.Nome @usuario.Sobrenome</td>
+                        <td>@usuario.Email</td>
+                        <td>@usuario.Celular</td>
+                        <td>
+                            <a role="button" class="btn btn-outline-success" asp-route-id="@usuario.Id" asp-controller="Usuario" asp-action="Perfil">Ver Perfil</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+            <tr scope="row" colspan="5">Nenhum usuário encontrado</tr>
+                @*<h5>Nenhum usuário encontrado</h5>*@
+            }
+            
+            
+        </tbody>
+    </table>
+</div>

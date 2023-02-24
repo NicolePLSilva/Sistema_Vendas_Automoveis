@@ -26,3 +26,7 @@ $('.close').click(function () {
 $('#excluirVeiculo').click(function () {
     $('.modal-excluir').show('show');
 });
+
+$('#excluirUsuario').click(function () {
+    $('.modal-excluir').show('show');
+});
