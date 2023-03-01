@@ -93,6 +93,7 @@ footer {
     text-shadow: -1px -1px 2px blue, 1px 1px 2px black;
     font-style: italic;
     font-weight: bolder;
+    padding-left: 10%
 }
 
 .brandDecoration {
@@ -139,4 +140,18 @@ footer {
 
 .bg-dark-persornalizado{
     background-color: var(--bs-dark);
+}
+
+#contaUsuario {
+    background-color: brown;
+    margin-left: 6px;
+    margin-right: 4px;
+    font-weight: 800;
+    min-width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 3px 1px white;
+    text-shadow: 0px 0px 3px black;
 }

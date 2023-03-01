@@ -1,0 +1,173 @@
+﻿@using SistemasVendasDeAutomoveis.Enums
+@model UsuarioModel
+@{
+    ViewData["Title"] = Model.Nome + " " + Model.Sobrenome + " Perfil";
+}
+
+<div class="container-xl mt-5 mb-5">
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success alert-fechar" role="alert">
+            <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger alert-fechar" role="alert">
+            <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+    <div class="d-flex justify-content-end">
+        <input type="hidden" asp-for="Id" />
+        @*<a role="button" class="btn btn-primary mx-lg-4" asp-route-id="@Model.Id" asp-action="Editar" asp-controller="Usuario"><small>Editar</small></a>
+        <a role="button" class="btn btn-danger mx-lg-4" id="excluirUsuario"><small>Excluir</small></a>*@
+    </div>
+    <br />
+    <div class="row d-flex justify-content-center border bg-light" style="padding:7px; box-shadow:0px 0px 4px 2px black">
+        @if (Model.CPF == null || Model.Estado == null || Model.Cidade == null ||
+        Model.Endereco == null)
+        {
+            <div class="card-header text-center bg-danger text-light">
+                <small><b>Complete seu perfil para poder comprar ou anunciar</b></small>
+            </div>
+        }
+        <div class="col-md-6">
+            <div class="mt-4 mb-3">
+                <div class="card text-dark">
+                    
+                    <div class="card-body">
+                        <h5> @Model.Nome @Model.Sobrenome</h5>
+                        <dl class="row">
+                            <dt class="col-sm-4">Tipo de perfil: </dt>
+                            <dd class="col-sm-8">
+                                @if (Model.Perfil == PerfilEnum.ADMIN)
+                                {
+                                    <span class="text-danger"><b>Administrador(a)</b></span>
+                                }
+                                else
+                                {
+                                    <span><b>Usuário(a)</b></span>
+                                }
+                            </dd>
+                            <dt class="col-sm-4">E-mail: </dt>
+                            <dd class="col-sm-8">
+                                @Model.Email
+                            </dd>
+                            <dt class="col-sm-4">Celular: </dt>
+                            <dd class="col-sm-8">
+                                @Model.Celular
+                            </dd>
+                            <dt class="col-sm-4">Data de Cadastro: </dt>
+                            <dd class="col-sm-8">
+                                @Model.DataCadastro
+                            </dd>
+                            <dt class="col-sm-4">Última Atualização: </dt>
+                            <dd class="col-sm-8">
+                                @if (Model.DataAtualizacao != null)
+                                {
+                                    <span>@Model.DataAtualizacao</span>
+                                }
+                                else
+                                {
+                                    <span>Nunca atualizado</span>
+                                }
+                            </dd>
+                        </dl>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6 ">
+
+            <div class="mt-4 mb-3">
+                <div class="card text-dark ">
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">CPF: </dt>
+                            <dd class="col-sm-8">
+                                @if(Model.CPF == null)
+                                {
+                                    <small class="text-danger">Adicione seu CPF; Complete seu cadastro!</small>
+                                }
+                                else
+                                {
+                                    @Model.CPF
+                                }
+                                
+                            </dd>
+                            <dt class="col-sm-4">Localização Atual: </dt>
+                            <dd class="col-sm-8">
+                                @if (Model.Cidade == null)
+                                {
+                                    <small class="text-danger">Adicione sua cidade!</small>
+                                }
+                                else
+                                {
+                                    @Model.Cidade
+                                }
+                                ,
+                                @if (Model.Estado == null)
+                                {
+                                    <small class="text-danger">Adicione seu estado!</small>
+                                }
+                                else
+                                {
+                                    @Model.Estado
+                                }
+                                
+                            </dd>
+                            <dt class="col-sm-4">Endereço: </dt>
+                            <dd class="col-sm-8">
+                                @if (Model.Endereco == null)
+                                {
+                                    <small class="text-danger">Adicione seu endereço!</small>
+                                }
+                                else
+                                {
+                                    @Model.Endereco
+                                }
+                            </dd>
+                            <dt class="col-sm-4">Apto a anunciar: </dt>
+                            <dd class="col-sm-8">
+                                @if (Model.IsAnunciante == true)
+                                {
+                                    <span>Apto</span>
+                                }
+                                else
+                                {
+                                    <span>Não</span>
+                                }
+                            </dd>
+                            @*<dt class="col-sm-4">Comprador: </dt>
+                            <dd class="col-sm-8">
+                                Qtd carros comprados.
+                            </dd>
+                            <dt class="col-sm-4">Anunciador: </dt>
+                            <dd class="col-sm-8">
+                                Qtd carros anunciados.
+                            </dd>
+                            <dt class="col-sm-4">Vendidos: </dt>
+                            <dd class="col-sm-8">
+                                Qtd carros vendidos.
+                            </dd>*@
+                        </dl>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <br />
+    <a role="button" class="btn btn-outline-light mx-lg-4" asp-action="Index" asp-controller="Home"><small>Voltar</small></a>
+    <a role="button" class="btn btn-primary w-50 mx-lg-4" asp-route-id="@Model.Id" asp-action="Cadastro" asp-controller="GerenciarCadastro">Alterar informações</a>
+    
+</div>
+

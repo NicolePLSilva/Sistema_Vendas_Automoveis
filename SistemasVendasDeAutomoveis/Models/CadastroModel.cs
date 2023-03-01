@@ -14,11 +14,15 @@ namespace SistemasVendasDeAutomoveis.Models
         [EmailAddress(ErrorMessage = "Por favor, insira um endereço de e-mail válido")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "Campo obrigatório")]
+        public string Celular { get; set; }
+
         [Required(ErrorMessage = "Senha obrigatória")]
         public string Senha { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório")]
-        public string Celular { get; set; }
+        [Required(ErrorMessage = "Confirme a senha")]
+        [Compare("Senha", ErrorMessage = "Senha não confere com a nova senha")]
+        public string ConfirmarSenha { get; set; }
 
     }
 }

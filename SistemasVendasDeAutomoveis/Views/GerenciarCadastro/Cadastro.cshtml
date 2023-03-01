@@ -1,0 +1,156 @@
+﻿@using SistemasVendasDeAutomoveis.Enums
+@model UsuarioModel
+@{
+    ViewData["Title"] = Model.Nome + " " + Model.Sobrenome + " Perfil";
+}
+
+<div class="container-xl mt-5 mb-5">
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success alert-fechar" role="alert">
+            <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger alert-fechar" role="alert">
+            <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+    <br />
+    <form asp-controller="GerenciarCadastro" asp-action="Cadastro" method="post">
+        <input type="hidden" asp-for="Id"/>
+        <div class="row d-flex justify-content-center border bg-light" style="padding:7px; box-shadow:0px 0px 4px 2px black">
+            <div class="col-md-6">
+                <div class="mt-4 mb-3">
+                    <div class="card text-dark">
+
+                        <div class="card-body">
+                            <h5>
+                                <input type="text" class="form-control" asp-for="Nome" />
+                                @Html.ValidationMessageFor(x => x.Nome)
+                                <input type="text" class="form-control" asp-for="Sobrenome" />
+                                @Html.ValidationMessageFor(x => x.Sobrenome)
+                            </h5>
+                            <dl class="row">
+                                <dt class="col-sm-4">E-mail: </dt>
+                                <dd class="col-sm-8">
+                                    <input type="text" class="form-control" asp-for="Email" />
+                                    @Html.ValidationMessageFor(x => x.Email)
+                                </dd>
+                                <dt class="col-sm-4">Celular: </dt>
+                                <dd class="col-sm-8">
+                                    <input type="text" class="form-control" asp-for="Celular"
+                                           data-mask="(##) #####-###0" />
+                                    @Html.ValidationMessageFor(x => x.Celular)
+                                </dd>
+                              
+                            </dl>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="col-md-6 ">
+
+                <div class="mt-4 mb-3">
+                    <div class="card text-dark ">
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-4">CPF: </dt>
+                                <dd class="col-sm-8">
+                                    <input type="text" class="form-control" asp-for="CPF"
+                                           data-mask="0##.###.###-#0" placeholder="000.000.000-00" />
+                                    @Html.ValidationMessageFor(x => x.CPF)
+                                </dd>
+                                <dt class="col-sm-4">Localização Atual: </dt>
+                                <dd class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="text" class="form-control" asp-for="Cidade" placeholder="Cidade" />
+                                            @Html.ValidationMessageFor(x => x.Cidade)
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" asp-for="Estado" placeholder="Estado" />
+                                            @Html.ValidationMessageFor(x => x.Estado)
+                                        </div>
+                                    </div>
+                                </dd>
+                                <dt class="col-sm-4">Endereço: </dt>
+                                <dd class="col-sm-8">
+                                    <input type="text" class="form-control" asp-for="Endereco" placeholder="Rua, Bairro, nº" />
+                                </dd>
+                                <dt class="col-sm-4">Anuciar? </dt>
+                                <dd class="col-sm-8">
+                                    <select asp-for="IsAnunciante">
+                                        <option value="0">Desabilitar</option>
+                                        <option value="1">Habilitar</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(x => x.IsAnunciante)
+                                </dd>
+                                @*  <dt class="col-sm-4">Apto a anunciar: </dt>
+                                <dd class="col-sm-8">
+                                @if (Model.IsAnunciante == true)
+                                {
+                                <span>Apto</span>
+                                }
+                                else
+                                {
+                                <span>Não</span>
+                                }
+                                </dd>*@
+                                @*<dt class="col-sm-4">Comprador: </dt>
+                                <dd class="col-sm-8">
+                                Qtd carros comprados.
+                                </dd>
+                                <dt class="col-sm-4">Anunciador: </dt>
+                                <dd class="col-sm-8">
+                                Qtd carros anunciados.
+                                </dd>
+                                <dt class="col-sm-4">Vendidos: </dt>
+                                <dd class="col-sm-8">
+                                Qtd carros vendidos.
+                                </dd>*@
+                            </dl>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+        <br />
+        <a role="button" class="btn btn-outline-light mx-lg-4" asp-route-id="@Model.Id" asp-action="Index" asp-controller="GerenciarCadastro"><small>Voltar</small></a>
+        <button type="submit" class="btn btn-primary w-50 mx-lg-4" >Salvar</button>
+
+        
+        <a role="button" class="btn btn-danger mx-lg-4" id="excluirUsuario"><small>Deletar Conta</small></a>
+    </form>
+</div>
+
+<div class="modal modal-excluir bg-dark bg-opacity-75" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-dark border-danger">
+            <div class="modal-header">
+                <h5 class="modal-title">Deseja realmente excluir sua conta?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cancelar</button>
+                <a role="button" class="btn btn-danger" asp-route-id="@Model.Id"
+                   asp-controller="Usuario" asp-action="Excluir">Prosseguir com a exclusão</a>
+            </div>
+        </div>
+    </div>
+</div>

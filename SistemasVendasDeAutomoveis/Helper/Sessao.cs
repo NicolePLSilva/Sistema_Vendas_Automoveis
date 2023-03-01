@@ -15,19 +15,19 @@ namespace SistemasVendasDeAutomoveis.Helper
         public void CriarSessaoDoUsuario(UsuarioModel usuarioModel)
         {
             string valor = JsonConvert.SerializeObject(usuarioModel);
-            _httpContextAccessor.HttpContext.Session.SetString("sessaoUsuario", valor);
+            _httpContextAccessor.HttpContext.Session.SetString("sessaoUsuarioLogado", valor);
         }
 
         public void RemoverSessaoDoUsuario()
         {
-            _httpContextAccessor.HttpContext.Session.Remove("sessaoUsuario");
+            _httpContextAccessor.HttpContext.Session.Remove("sessaoUsuarioLogado");
         }
 
-        public UsuarioModel BuscarSessao()
+        public UsuarioModel BuscarSessaoDoUsuario()
         {
-            string sessaoUsuario = _httpContextAccessor.HttpContext.Session.GetString("sessaoUsuario");
+            string sessaoUsuario = _httpContextAccessor.HttpContext.Session.GetString("sessaoUsuarioLogado");
 
-            if (sessaoUsuario == null) return null;
+            if (string.IsNullOrEmpty(sessaoUsuario)) return null;
 
             return JsonConvert.DeserializeObject<UsuarioModel>(sessaoUsuario);
         }

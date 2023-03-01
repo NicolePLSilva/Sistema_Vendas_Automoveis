@@ -1,11 +1,12 @@
-﻿using SistemasVendasDeAutomoveis.Enums;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using SistemasVendasDeAutomoveis.Enums;
 using SistemasVendasDeAutomoveis.Helper;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace SistemasVendasDeAutomoveis.Models
 {
-    public class UsuarioModel
+    public class GerenciarcadastroModel
     {
         public int Id { get; set; }
 
@@ -20,9 +21,6 @@ namespace SistemasVendasDeAutomoveis.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        public string Senha { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório")]
         public string Celular { get; set; }
 
         public string? CPF { get; set; }
@@ -33,29 +31,7 @@ namespace SistemasVendasDeAutomoveis.Models
 
         public string? Endereco { get; set; }
 
-        public PerfilEnum Perfil{ get; set;}
-
         public bool IsAnunciante { get; set; }
 
-        public DateTime DataCadastro { get; set; }
-
-        public DateTime? DataAtualizacao { get; set; }
-
-        //public virtual List<CarroModel>? ListaCarros { get; set; }
-
-        public bool SenhaValida(string senha)
-        {
-            return Senha == senha.GerarHash();
-        }
-
-        public void SetSenhaHash()
-        {
-            Senha = Senha.GerarHash();
-        }
-
-        public void SetNovaSenha(string novaSenha)
-        {
-            Senha = novaSenha.GerarHash();
-        }
     }
 }

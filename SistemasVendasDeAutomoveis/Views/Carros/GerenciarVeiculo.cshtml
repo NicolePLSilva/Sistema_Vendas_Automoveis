@@ -20,9 +20,11 @@
             @TempData["MensagemErro"]
         </div>
     }
-  <div class="text-center">
-      <h5 class="display-5">Detalhes do Veículo</h5>
-  </div>
+    <div class="d-flex justify-content-end">
+       <input type="hidden" asp-for="Id"/>
+        <a role="button" class="btn btn-primary mx-lg-4" asp-route-id="@Model.Id" asp-action="Editar" asp-controller="Carros"><small>Editar</small></a>
+        <a role="button" class="btn btn-danger mx-lg-4" id="excluirVeiculo"><small>Excluir</small></a>
+    </div>
     <br />
     <div class="row d-flex justify-content-center border bg-light" style="padding:7px; box-shadow:0px 0px 4px 2px black">
         <div class="col-md-6">
@@ -124,12 +126,7 @@
                             <dt class="col-sm-4">Preço:</dt>
                             <dd class="col-sm-8">R$@Model.Preco</dd>
                         </dl>
-                        <div class="d-flex align-items-center justify-content-center text-center">
-                            <a role="button" class="btn btn-success bg-gradient w-75 text-uppercase"
-                               style="min-height:60px; padding: 1.5rem; box-shadow: 2px 2px 3px 2px black">
-                                <b>Comprar</b>
-                            </a>
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -139,5 +136,23 @@
 
     </div>
     <br />
-    <a role="button" class="btn btn-outline-light" asp-action="Index" asp-controller="Carros"><small>Ver outros veículos</small></a>
+    <a role="button" class="btn btn-outline-light" asp-action="Listagem" asp-controller="Carros"><small>Voltar</small></a>
+</div>
+
+<div class="modal modal-excluir bg-dark bg-opacity-75" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-dark border-danger">
+            <div class="modal-header">
+                <h5 class="modal-title">Deseja realmente excluir este veículo?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cancelar</button>
+                <a role="button" class="btn btn-danger" asp-route-id="@Model.Id"
+                asp-controller="Carros" asp-action="Excluir">Prosseguir com a exclusão</a>
+            </div>
+        </div>
+    </div>
 </div>

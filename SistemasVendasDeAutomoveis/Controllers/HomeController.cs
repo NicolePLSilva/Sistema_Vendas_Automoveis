@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemasVendasDeAutomoveis.Filters;
 using SistemasVendasDeAutomoveis.Models;
 using System.Diagnostics;
 
 namespace SistemasVendasDeAutomoveis.Controllers
 {
+    [PaginaUser]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

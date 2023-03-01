@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemasVendasDeAutomoveis.Filters;
+using SistemasVendasDeAutomoveis.Helper;
 using SistemasVendasDeAutomoveis.Models;
 using SistemasVendasDeAutomoveis.Repositorios;
 using System.Runtime.ConstrainedExecution;
@@ -6,6 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace SistemasVendasDeAutomoveis.Controllers
 {
+    [PaginaUser]
     public class CarrosController : Controller
     {
         private readonly ICarroRepositorio _carroRepositorio;
@@ -21,24 +24,40 @@ namespace SistemasVendasDeAutomoveis.Controllers
             return View(carros);
         }
 
+        public IActionResult Listagem()
+        {
+            List<CarroModel> carros = _carroRepositorio.ListarTodos();
+            return View(carros);
+        }
+
+        [PaginaUser]
         public IActionResult Detalhes(int id)
         {
             CarroModel carro = _carroRepositorio.BuscarPorId(id);
             return View(carro);
         }
 
+        [PaginaAdmin]
+        public IActionResult Gerenciar(int id)
+        {
+            CarroModel carro = _carroRepositorio.BuscarPorId(id);
+            return View("GerenciarVeiculo", carro);
+        }
+
+        [PaginaAdmin]
         public IActionResult Cadastrar()
         {
             return View();
         }
 
+        [PaginaAdmin]
         public IActionResult Editar(int id)
         {
             CarroModel carroModel = _carroRepositorio.BuscarPorId(id);
             return View(carroModel);
         }
 
-
+        [PaginaAdmin]
         public IActionResult Excluir(int id)
         {
             try
@@ -47,15 +66,15 @@ namespace SistemasVendasDeAutomoveis.Controllers
                 if (removido)
                 {
                     TempData["MensagemSucesso"] = "Veículo excluído com sucesso!";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Listagem");
                 }
                 TempData["MensagemErro"] = $"A exclusão do veículo falhou!";
-                return RedirectToAction("Index");
+                return RedirectToAction("Listagem");
             }
             catch (Exception erro)
             {
                 TempData["MensagemErro"] = $"Falha ao tentar excluir o veículo! Detalhes do erro: {erro.Message}";
-                return RedirectToAction("Index");
+                return RedirectToAction("Listagem");
             }
         }
 
@@ -88,12 +107,12 @@ namespace SistemasVendasDeAutomoveis.Controllers
 
                         _carroRepositorio.Adicionar(carro);
                         TempData["MensagemSucesso"] = "Veículo cadastrado com sucesso!";
-                        return RedirectToAction("Detalhes", carro);
+                        return RedirectToAction("Gerenciar", carro);
                     }
 
                     TempData["MensagemErro"] = $"Ops, um erro inesperado aconteceu! Não conseguimos cadastrar o veículo!" +
                         $"Por favor, tente novamente.";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Listagem");
 
                 }
 
@@ -102,7 +121,7 @@ namespace SistemasVendasDeAutomoveis.Controllers
             catch (Exception erro)
             {
                 TempData["MensagemErro"] = $"Falha ao cadastrar o veículo! Detalhes do erro: {erro.Message}";
-                return RedirectToAction("Index");
+                return RedirectToAction("Listagem");
             }
         }
 
@@ -136,7 +155,7 @@ namespace SistemasVendasDeAutomoveis.Controllers
 
                         carro = _carroRepositorio.Alterar(carro);
                         TempData["MensagemSucesso"] = "Veículo atualizado com sucesso!";
-                        return RedirectToAction("Detalhes", carro);
+                        return RedirectToAction("Listagem");
                     }
 
                     TempData["MensagemErro"] = $"Ops, um erro inesperado aconteceu! Não conseguimos atualizar o veículo!" +

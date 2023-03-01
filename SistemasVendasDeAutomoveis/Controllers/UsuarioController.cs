@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemasVendasDeAutomoveis.Filters;
 using SistemasVendasDeAutomoveis.Models;
 using SistemasVendasDeAutomoveis.Repositorios;
 
 namespace SistemasVendasDeAutomoveis.Controllers
 {
+    [PaginaAdmin]
     public class UsuarioController : Controller
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
@@ -99,9 +101,9 @@ namespace SistemasVendasDeAutomoveis.Controllers
                         Perfil = usuarioModel.Perfil,
                         IsAnunciante = usuarioModel.IsAnunciante
                     };
-                    usuarioModel = _usuarioRepositorio.Alterar(usuarioModel);
+                    usuario = _usuarioRepositorio.Alterar(usuario);
                     TempData["MensagemSucesso"] = "Usuário alterado com sucesso!";
-                    return RedirectToAction("Perfil", usuarioModel);
+                    return RedirectToAction("Perfil", usuario);
                 }
                 TempData["MensagemErro"] = $"A alteração do usuário falhou!";
                 return RedirectToAction("Index");

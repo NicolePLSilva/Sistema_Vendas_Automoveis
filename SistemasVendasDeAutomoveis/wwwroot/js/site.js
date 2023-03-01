@@ -3,7 +3,6 @@
 
 // Write your JavaScript code.
 $(document).ready(function () {
-    
     $("#select-estado").on("change", function () {
         
         if ($(this).val() === "NOVO") {
@@ -29,4 +28,8 @@ $('#excluirVeiculo').click(function () {
 
 $('#excluirUsuario').click(function () {
     $('.modal-excluir').show('show');
+});
+
+$('#dropdownMenuButton').click(function () {
+    $('.dropdown-toggle').dropdown('toggle');
 });

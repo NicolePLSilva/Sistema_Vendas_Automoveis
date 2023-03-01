@@ -8,6 +8,6 @@ namespace SistemasVendasDeAutomoveis.Helper
 
         void RemoverSessaoDoUsuario();
 
-        UsuarioModel BuscarSessao();
+        UsuarioModel BuscarSessaoDoUsuario();
     }
 }

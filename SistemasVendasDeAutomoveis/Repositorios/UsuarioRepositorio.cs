@@ -24,6 +24,11 @@ namespace SistemasVendasDeAutomoveis.Repositorios
             return _context.Usuarios.FirstOrDefault(u => u.Id == id);
         }
 
+        public UsuarioModel BuscarPorEmail(string email)
+        {
+            return _context.Usuarios.FirstOrDefault(u => u.Email.Trim() == email.Trim());
+        }
+
         public UsuarioModel Adicionar(UsuarioModel usuario)
         {
             usuario.DataCadastro = DateTime.Now;
