@@ -89,8 +89,8 @@
                                 <dt class="col-sm-4">Anuciar? </dt>
                                 <dd class="col-sm-8">
                                     <select asp-for="IsAnunciante">
-                                        <option value="0">Desabilitar</option>
-                                        <option value="1">Habilitar</option>
+                                        <option value="false">Desabilitar</option>
+                                        <option value="true">Habilitar</option>
                                     </select>
                                     @Html.ValidationMessageFor(x => x.IsAnunciante)
                                 </dd>

@@ -4,27 +4,28 @@
     ViewData["Title"] = Model.Nome + " " + Model.Sobrenome + " Perfil";
 }
 
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success alert-fechar" role="alert">
+        <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
+        @TempData["MensagemSucesso"]
+    </div>
+}
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger alert-fechar" role="alert">
+        <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
+        @TempData["MensagemErro"]
+    </div>
+}
+
 <div class="container-xl mt-5 mb-5">
 
-    @if (TempData["MensagemSucesso"] != null)
-    {
-        <div class="alert alert-success alert-fechar" role="alert">
-            <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
-            @TempData["MensagemSucesso"]
-        </div>
-    }
-    @if (TempData["MensagemErro"] != null)
-    {
-        <div class="alert alert-danger alert-fechar" role="alert">
-            <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
-            @TempData["MensagemErro"]
-        </div>
-    }
+ @*  
     <div class="d-flex justify-content-end">
         <input type="hidden" asp-for="Id" />
-        @*<a role="button" class="btn btn-primary mx-lg-4" asp-route-id="@Model.Id" asp-action="Editar" asp-controller="Usuario"><small>Editar</small></a>
-        <a role="button" class="btn btn-danger mx-lg-4" id="excluirUsuario"><small>Excluir</small></a>*@
-    </div>
+    
+    </div>*@
     <br />
     <div class="row d-flex justify-content-center border bg-light" style="padding:7px; box-shadow:0px 0px 4px 2px black">
         @if (Model.CPF == null || Model.Estado == null || Model.Cidade == null ||
@@ -168,6 +169,7 @@
     <br />
     <a role="button" class="btn btn-outline-light mx-lg-4" asp-action="Index" asp-controller="Home"><small>Voltar</small></a>
     <a role="button" class="btn btn-primary w-50 mx-lg-4" asp-route-id="@Model.Id" asp-action="Cadastro" asp-controller="GerenciarCadastro">Alterar informações</a>
+    <a role="button" class="btn btn-warning mx-lg-4" asp-action="Index" asp-controller="AlterarSenha">Alterar senha</a>
     
 </div>
 

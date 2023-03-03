@@ -18,7 +18,6 @@ namespace SistemasVendasDeAutomoveis.Controllers
 
         public IActionResult Index()
         {
-            //UsuarioModel usuario = _usuarioRepositorio.BuscarPorId(id);
             UsuarioModel usuario = _sessao.BuscarSessaoDoUsuario();
             return View(usuario);
         }
@@ -49,15 +48,13 @@ namespace SistemasVendasDeAutomoveis.Controllers
                         Cidade = usuarioModel.Cidade,
                         Endereco = usuarioModel.Endereco,
                         IsAnunciante = usuarioModel.IsAnunciante,
-
-                        Perfil = Enums.PerfilEnum.USER,
                     };
-                    usuario = _usuarioRepositorio.Alterar(usuario);
+                    usuario = _usuarioRepositorio.AlterarCadastro(usuario);
                     TempData["MensagemSucesso"] = "Salvo com sucesso!";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", usuario);
                 }
                 TempData["MensagemErro"] = $"A alteração falhou!";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", usuario);
             }
             catch (Exception erro)
             {

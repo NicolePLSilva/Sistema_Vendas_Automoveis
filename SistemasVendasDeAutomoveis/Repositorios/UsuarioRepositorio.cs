@@ -78,5 +78,49 @@ namespace SistemasVendasDeAutomoveis.Repositorios
 
             return usuarioDB;
         }
+
+        public UsuarioModel AlterarCadastro(UsuarioModel usuarioModel)
+        {
+            UsuarioModel usuarioDB = BuscarPorId(usuarioModel.Id);
+
+            if (usuarioDB == null) throw new Exception("Id não encontrado!");
+
+            usuarioDB.Nome = usuarioModel.Nome;
+            usuarioDB.Sobrenome = usuarioModel.Sobrenome;
+            usuarioDB.Email = usuarioModel.Email;
+            usuarioDB.Celular = usuarioModel.Celular;
+            usuarioDB.CPF = usuarioModel.CPF;
+            usuarioDB.Estado = usuarioModel.Estado;
+            usuarioDB.Cidade = usuarioModel.Cidade;
+            usuarioDB.Endereco = usuarioModel.Endereco;
+            usuarioDB.IsAnunciante = usuarioModel.IsAnunciante;
+            usuarioDB.DataAtualizacao = DateTime.Now;
+
+            _context.Usuarios.Update(usuarioDB);
+            _context.SaveChanges();
+
+            return usuarioDB;
+        }
+
+        public UsuarioModel AlterarSenha(AlterarSenhaModel alterarSenhaModel)
+        {
+            UsuarioModel usuarioDB = BuscarPorId(alterarSenhaModel.Id);
+
+            if (usuarioDB == null) throw new Exception("Não foi possível alterar a senha pois o usuário não foi encontrado!");
+
+            if (!usuarioDB.SenhaValida(alterarSenhaModel.SenhaAtual)) throw new Exception("Senha atual não é válida!");
+
+            if (usuarioDB.SenhaValida(alterarSenhaModel.NovaSenha)) throw new Exception("A nova senha deve ser diferente da senha atual!");
+
+            usuarioDB.SetNovaSenha(alterarSenhaModel.NovaSenha);
+            usuarioDB.DataAtualizacao = DateTime.Now;
+
+            _context.Usuarios.Update(usuarioDB);
+            _context.SaveChanges();
+
+            return usuarioDB;
+
+
+        }
     }
 }
