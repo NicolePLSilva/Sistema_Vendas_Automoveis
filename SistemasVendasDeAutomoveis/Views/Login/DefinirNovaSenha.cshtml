@@ -1,0 +1,52 @@
+﻿@model RedefinirNovaSenhaModel
+@{
+    Layout = "_LayoutDeslogado";
+    ViewData["Title"] = "Redefinir senha";
+}
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success alert-fechar" role="alert">
+        <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
+        @TempData["MensagemSucesso"]
+    </div>
+}
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger alert-fechar" role="alert">
+        <button type="button" class="btn btn-danger btn-fechar close"><b>X</b></button>
+        @TempData["MensagemErro"]
+    </div>
+}
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="inputPainel">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="display-5">Redefinir Senha</h1>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Login" asp-action="DefinirNovaSenha" method="post">
+                        <input type="hidden" asp-for="@Model.CodigoRedefinicao" value="@Model.CodigoRedefinicao" />
+                        <div class="card mt-4 mb-3 text-dark">
+                            <div class="card-body">
+                                <label for="novaSenha">Nova Senha</label>
+                                <input type="password" class="form-control" asp-for="NovaSenha" />
+                                @Html.ValidationMessageFor(x => x.NovaSenha)
+                                <br />
+                                <label for="confirmarNovaSenha">Confirme nova senha</label>
+                                <input type="password" class="form-control" asp-for="ConfirmarNovaSenha" />
+                                @Html.ValidationMessageFor(x => x.ConfirmarNovaSenha)
+                                <br />
+                                <button type="submit" class="btn btn-success w-100" asp-route-id="@Model.CodigoRedefinicao">Redefinir</button>
+                                <br />
+                                <br />
+                                <a role="button" class="btn btn-outline-primary w-100" asp-controller="Login" asp-action="Index">Voltar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

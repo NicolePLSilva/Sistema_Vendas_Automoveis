@@ -138,9 +138,9 @@ footer {
     font-size: xx-small;
 }
 
-.bg-dark-persornalizado{
+/*.bg-dark-persornalizado{
     background-color: var(--bs-dark);
-}
+}*/
 
 #contaUsuario {
     background-color: brown;
@@ -154,4 +154,15 @@ footer {
     border-radius: 5px;
     box-shadow: inset 0px 0px 3px 1px white;
     text-shadow: 0px 0px 3px black;
+}
+
+.inputPainel {
+    display: block;
+    background-color: var(--bs-light);
+    padding: 10px;
+    box-shadow: 0px 0px 4px 2px black;
+    min-height: 300px;
+    min-width: 300px;
+    color: var(--bs-dark);
+    border-radius: 4px;
 }

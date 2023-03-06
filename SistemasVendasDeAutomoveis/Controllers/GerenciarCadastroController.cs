@@ -37,6 +37,10 @@ namespace SistemasVendasDeAutomoveis.Controllers
                 UsuarioModel usuario = null;
                 if (ModelState.IsValid)
                 {
+                    UsuarioModel usuarioDB = _usuarioRepositorio.BuscarPorId(usuarioModel.Id);
+
+                    if (usuarioDB == null) throw new Exception();
+
                     usuario = new UsuarioModel
                     {
                         Id = usuarioModel.Id,
@@ -47,10 +51,13 @@ namespace SistemasVendasDeAutomoveis.Controllers
                         CPF = usuarioModel.CPF,
                         Estado = usuarioModel.Estado,
                         Cidade = usuarioModel.Cidade,
+                        Senha = usuarioDB.Senha,
+                        Perfil = usuarioDB.Perfil,
                         Endereco = usuarioModel.Endereco,
                         IsAnunciante = usuarioModel.IsAnunciante,
                     };
-                    usuario = _usuarioRepositorio.AlterarCadastro(usuario);
+                    //usuario = _usuarioRepositorio.AlterarCadastro(usuario);
+                    usuario = _usuarioRepositorio.Alterar(usuario); //Testar
                     TempData["MensagemSucesso"] = "Salvo com sucesso!";
                     return RedirectToAction("Index");
                 }

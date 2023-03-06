@@ -19,12 +19,12 @@
     </div>
 }
 
-<div class=" container  mt-5 mb-5 w-25 text-dark" >
-    <div class=" altLogin  bg-light" style="display:block; padding:10px; box-shadow:0px 0px 4px 2px black; min-height:300px; min-width:260px">
+<div class=" container  mt-5 mb-5 w-25 text-dark">
+    <div class="inputPainel">
         <div class="card-header text-center">
             <h5 class="display-5">Login</h5>
         </div>
-        <br/>
+        <br />
         <div class="card-body">
             <form asp-controller="Login" asp-action="Entrar" method="post">
                 <div class="form-group">
@@ -40,15 +40,18 @@
                 <br />
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="continuarConectado">Continuar conectado</label>
+                    <label class="form-check-label" for="continuarConectado"><small>Continuar conectado</small></label>
                 </div>
-                <p>Esqueceu sua senha? <a asp-controller="Login" asp-action="Redefinir"><b>Redefinir senha</b></a></p>
+                <a asp-controller="Login" asp-action="RedefinirSenha"><b><small>Esqueceu a senha?</small></b></a>
+                <br />
                 <br />
                 <button type="submit" class="btn btn-success w-100">Entrar</button>
+                <br />
+                <br />
                 <p>Não possue cadastro? <a asp-controller="Login" asp-action="Cadastrar"><b>Registrar</b></a></p>
             </form>
         </div>
-    </div>  
+    </div>
 </div>
 
-                
+

@@ -21,12 +21,18 @@ namespace SistemasVendasDeAutomoveis.Repositorios
 
         public UsuarioModel BuscarPorId(int id)
         {
-            return _context.Usuarios.FirstOrDefault(u => u.Id == id);
+            return _context.Usuarios.Single(u => u.Id == id);
         }
 
         public UsuarioModel BuscarPorEmail(string email)
         {
-            return _context.Usuarios.FirstOrDefault(u => u.Email.Trim() == email.Trim());
+            return _context.Usuarios.Single(u => u.Email.Trim() == email.Trim());
+        }
+
+
+        public UsuarioModel BuscarPorCodigoRedefinicao(string codigo)
+        {
+            return _context.Usuarios.Single(u => u.CodigoRedefinirSenha == codigo);
         }
 
         public UsuarioModel Adicionar(UsuarioModel usuario)
@@ -70,31 +76,9 @@ namespace SistemasVendasDeAutomoveis.Repositorios
             usuarioDB.IsAnunciante = usuarioModel.IsAnunciante;
             usuarioDB.Senha = usuarioModel.Senha;
             usuarioDB.DataAtualizacao = DateTime.Now;
+            usuarioDB.CodigoRedefinirSenha = usuarioModel.CodigoRedefinirSenha;
 
             usuarioDB.SetSenhaHash();
-
-            _context.Usuarios.Update(usuarioDB);
-            _context.SaveChanges();
-
-            return usuarioDB;
-        }
-
-        public UsuarioModel AlterarCadastro(UsuarioModel usuarioModel)
-        {
-            UsuarioModel usuarioDB = BuscarPorId(usuarioModel.Id);
-
-            if (usuarioDB == null) throw new Exception("Id não encontrado!");
-
-            usuarioDB.Nome = usuarioModel.Nome;
-            usuarioDB.Sobrenome = usuarioModel.Sobrenome;
-            usuarioDB.Email = usuarioModel.Email;
-            usuarioDB.Celular = usuarioModel.Celular;
-            usuarioDB.CPF = usuarioModel.CPF;
-            usuarioDB.Estado = usuarioModel.Estado;
-            usuarioDB.Cidade = usuarioModel.Cidade;
-            usuarioDB.Endereco = usuarioModel.Endereco;
-            usuarioDB.IsAnunciante = usuarioModel.IsAnunciante;
-            usuarioDB.DataAtualizacao = DateTime.Now;
 
             _context.Usuarios.Update(usuarioDB);
             _context.SaveChanges();
@@ -122,5 +106,6 @@ namespace SistemasVendasDeAutomoveis.Repositorios
 
 
         }
+
     }
 }

@@ -41,6 +41,8 @@ namespace SistemasVendasDeAutomoveis.Models
 
         public DateTime? DataAtualizacao { get; set; }
 
+        public string? CodigoRedefinirSenha { get; set; }
+
         //public virtual List<CarroModel>? ListaCarros { get; set; }
 
         public bool SenhaValida(string senha)
@@ -57,5 +59,8 @@ namespace SistemasVendasDeAutomoveis.Models
         {
             Senha = novaSenha.GerarHash();
         }
+
+        
+
     }
 }
