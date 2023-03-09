@@ -1,4 +1,5 @@
-﻿using SistemasVendasDeAutomoveis.Enums;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using SistemasVendasDeAutomoveis.Enums;
 using SistemasVendasDeAutomoveis.Helper;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -43,7 +44,9 @@ namespace SistemasVendasDeAutomoveis.Models
 
         public string? CodigoRedefinirSenha { get; set; }
 
-        //public virtual List<CarroModel>? ListaCarros { get; set; }
+        [ValidateNever]
+        public virtual List<CarroModel>? Veiculos { get; set; }
+        
 
         public bool SenhaValida(string senha)
         {

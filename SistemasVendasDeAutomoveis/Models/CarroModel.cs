@@ -1,4 +1,5 @@
-﻿using SistemasVendasDeAutomoveis.Enums;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using SistemasVendasDeAutomoveis.Enums;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
@@ -46,9 +47,15 @@ namespace SistemasVendasDeAutomoveis.Models
         [StringLength(14, ErrorMessage = "Excedeu número máximo de caracteres")]
         [DisplayName("Preço do veículo")]
         public decimal Preco { get; set; }
-        
 
-        
+        [ValidateNever]
+        public bool Vendido { get; set; }
+
+        public int? AnunciateId { get; set; }
+        //public UsuarioModel? UsuarioVendedor { get; set; }
+
+        public int? CompradorId { get; set; }
+        //public UsuarioModel? UsuarioComprador { get; set; }
 
 
     }
