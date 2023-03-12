@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemasVendasDeAutomoveis.Data;
 
@@ -11,9 +12,10 @@ using SistemasVendasDeAutomoveis.Data;
 namespace SistemasVendasDeAutomoveis.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    partial class BancoContextModelSnapshot : ModelSnapshot
+    [Migration("20230309232238_RecriandoTabelas")]
+    partial class RecriandoTabelas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,9 +42,6 @@ namespace SistemasVendasDeAutomoveis.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Combustivel")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CompradorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Cor")
@@ -74,17 +73,10 @@ namespace SistemasVendasDeAutomoveis.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("int");
 
-                    b.Property<int>("VendedorId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Vendido")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompradorId");
-
-                    b.HasIndex("VendedorId");
 
                     b.ToTable("Carros");
                 });
@@ -147,32 +139,6 @@ namespace SistemasVendasDeAutomoveis.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("SistemasVendasDeAutomoveis.Models.CarroModel", b =>
-                {
-                    b.HasOne("SistemasVendasDeAutomoveis.Models.UsuarioModel", "Comprador")
-                        .WithMany("VeiculosComprados")
-                        .HasForeignKey("CompradorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SistemasVendasDeAutomoveis.Models.UsuarioModel", "Vendedor")
-                        .WithMany("VeiculosAnunciados")
-                        .HasForeignKey("VendedorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Comprador");
-
-                    b.Navigation("Vendedor");
-                });
-
-            modelBuilder.Entity("SistemasVendasDeAutomoveis.Models.UsuarioModel", b =>
-                {
-                    b.Navigation("VeiculosAnunciados");
-
-                    b.Navigation("VeiculosComprados");
                 });
 #pragma warning restore 612, 618
         }

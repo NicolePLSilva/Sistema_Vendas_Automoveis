@@ -3,6 +3,7 @@ using SistemasVendasDeAutomoveis.Enums;
 using SistemasVendasDeAutomoveis.Helper;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SistemasVendasDeAutomoveis.Models
 {
@@ -45,8 +46,13 @@ namespace SistemasVendasDeAutomoveis.Models
         public string? CodigoRedefinirSenha { get; set; }
 
         [ValidateNever]
-        public virtual List<CarroModel>? Veiculos { get; set; }
-        
+        [InverseProperty("Vendedor")]
+        public virtual List<CarroModel>? VeiculosAnunciados { get; set; }
+
+        [ValidateNever]
+        [InverseProperty("Comprador")]
+        public virtual List<CarroModel>? VeiculosComprados { get; set; }
+
 
         public bool SenhaValida(string senha)
         {

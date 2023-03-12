@@ -2,6 +2,7 @@
 using SistemasVendasDeAutomoveis.Enums;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 
 namespace SistemasVendasDeAutomoveis.Models
@@ -48,15 +49,11 @@ namespace SistemasVendasDeAutomoveis.Models
         [DisplayName("Preço do veículo")]
         public decimal Preco { get; set; }
 
+        public UsuarioModel Vendedor { get; set; }
+        public UsuarioModel Comprador { get; set; }
+
         [ValidateNever]
-        public bool Vendido { get; set; }
-
-        public int? AnunciateId { get; set; }
-        //public UsuarioModel? UsuarioVendedor { get; set; }
-
-        public int? CompradorId { get; set; }
-        //public UsuarioModel? UsuarioComprador { get; set; }
-
+        public bool Vendido { get; set; }    
 
     }
 }
