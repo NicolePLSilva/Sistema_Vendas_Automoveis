@@ -74,11 +74,18 @@ namespace SistemasVendasDeAutomoveis.Repositorios
             usuarioDB.Endereco = usuarioModel.Endereco;
             usuarioDB.Perfil = usuarioModel.Perfil;
             usuarioDB.IsAnunciante = usuarioModel.IsAnunciante;
-            usuarioDB.Senha = usuarioModel.Senha;
+
+            if (usuarioDB.Senha != usuarioModel.Senha)
+            {
+                usuarioDB.Senha = usuarioModel.Senha;
+                usuarioDB.SetSenhaHash();
+            }
+
             usuarioDB.DataAtualizacao = DateTime.Now;
             usuarioDB.CodigoRedefinirSenha = usuarioModel.CodigoRedefinirSenha;
 
-            usuarioDB.SetSenhaHash();
+            
+
 
             _context.Usuarios.Update(usuarioDB);
             _context.SaveChanges();

@@ -12,10 +12,13 @@ namespace SistemasVendasDeAutomoveis.Controllers
     public class CarrosController : Controller
     {
         private readonly ICarroRepositorio _carroRepositorio;
+        private readonly ISessao _sessao;
 
-        public CarrosController(ICarroRepositorio carroRepositorio)
+        public CarrosController(ICarroRepositorio carroRepositorio,
+            ISessao sessao)
         {
             _carroRepositorio = carroRepositorio;
+            _sessao = sessao;
         }
 
         public IActionResult Index()
@@ -84,7 +87,7 @@ namespace SistemasVendasDeAutomoveis.Controllers
             try
             {
                 CarroModel carro = null;
-
+                UsuarioModel usuario = _sessao.BuscarSessaoDoUsuario();
                 if (ModelState.IsValid)
                 {
                     if (carroModel.Estado != null && carroModel.Cambio != null && carroModel.Combustivel != null &&
@@ -102,7 +105,9 @@ namespace SistemasVendasDeAutomoveis.Controllers
                             Combustivel = carroModel.Combustivel ?? throw new Exception(),
                             Carroceria = carroModel.Carroceria ?? throw new Exception(),
                             Quilometragem = carroModel.QuilometragemParaInt(carroModel.Quilometragem),
-                            Preco = carroModel.PrecoParaDecimal(carroModel.Preco)
+                            Preco = carroModel.PrecoParaDecimal(carroModel.Preco),
+                            //Comprador = null,
+                            //Vendedor = usuario
                         };
 
                         _carroRepositorio.Adicionar(carro);

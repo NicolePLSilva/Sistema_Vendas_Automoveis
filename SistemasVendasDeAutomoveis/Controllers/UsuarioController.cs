@@ -99,6 +99,7 @@ namespace SistemasVendasDeAutomoveis.Controllers
                         Cidade = usuarioModel.Cidade,
                         Endereco = usuarioModel.Endereco,
                         Perfil = usuarioModel.Perfil,
+                        Senha  = usuarioModel.Senha,
                         IsAnunciante = usuarioModel.IsAnunciante
                     };
                     usuario = _usuarioRepositorio.Alterar(usuario);
