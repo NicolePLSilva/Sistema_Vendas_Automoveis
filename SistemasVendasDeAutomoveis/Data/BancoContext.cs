@@ -14,6 +14,21 @@ namespace SistemasVendasDeAutomoveis.Data
 
         public DbSet<UsuarioModel> Usuarios { get; set; }
         
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<CarroModel>()
+                .HasOne(x => x.Vendedor)
+                .WithMany(x => x.VeiculosAnunciados)
+                .HasForeignKey(x => x.VendedorId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<CarroModel>()
+                .HasOne(x => x.Comprador)
+                .WithMany(x => x.VeiculosComprados)
+                .HasForeignKey(x => x.CompradorId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+        }
     }
 }

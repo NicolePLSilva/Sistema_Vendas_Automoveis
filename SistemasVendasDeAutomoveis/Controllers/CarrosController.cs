@@ -106,8 +106,8 @@ namespace SistemasVendasDeAutomoveis.Controllers
                             Carroceria = carroModel.Carroceria ?? throw new Exception(),
                             Quilometragem = carroModel.QuilometragemParaInt(carroModel.Quilometragem),
                             Preco = carroModel.PrecoParaDecimal(carroModel.Preco),
-                            //Comprador = null,
-                            //Vendedor = usuario
+                            CompradorId = null,
+                            VendedorId = usuario.Id
                         };
 
                         _carroRepositorio.Adicionar(carro);

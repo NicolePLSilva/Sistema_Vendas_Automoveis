@@ -86,7 +86,7 @@ namespace SistemasVendasDeAutomoveis.Migrations
 
                     b.HasIndex("VendedorId");
 
-                    b.ToTable("Carros");
+                    b.ToTable("Carros", (string)null);
                 });
 
             modelBuilder.Entity("SistemasVendasDeAutomoveis.Models.UsuarioModel", b =>
@@ -146,7 +146,7 @@ namespace SistemasVendasDeAutomoveis.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
                 });
 
             modelBuilder.Entity("SistemasVendasDeAutomoveis.Models.CarroModel", b =>

@@ -49,7 +49,10 @@ namespace SistemasVendasDeAutomoveis.Models
         [DisplayName("Preço do veículo")]
         public decimal Preco { get; set; }
 
+        public int? VendedorId { get; set; }
         public UsuarioModel? Vendedor { get; set; }
+
+        public int? CompradorId { get; set; }
         public UsuarioModel? Comprador { get; set; }
 
         [ValidateNever]
