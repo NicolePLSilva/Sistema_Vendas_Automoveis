@@ -9,6 +9,8 @@ namespace SistemasVendasDeAutomoveis.Models
 
         [Required(ErrorMessage = "Campo obrigatório para efetuar o login!")]
         public string Senha { get; set; }
+
+        public bool LembrarLogin { get; set; }
  
     }
 }

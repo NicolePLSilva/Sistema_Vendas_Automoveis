@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using SistemasVendasDeAutomoveis.Data;
 using SistemasVendasDeAutomoveis.Helper;
 using SistemasVendasDeAutomoveis.Models;
 using SistemasVendasDeAutomoveis.Repositorios;
+using System.Security.Claims;
+using SistemasVendasDeAutomoveis.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SistemasVendasDeAutomoveis.Controllers
 {
@@ -11,27 +16,33 @@ namespace SistemasVendasDeAutomoveis.Controllers
         private readonly IUsuarioRepositorio _usuarioRepositorio;
         private readonly ISessao _sessao;
         private readonly IEmail _email;
+        private readonly IServices _services;
 
         public LoginController(IUsuarioRepositorio usuarioRepositorio, ISessao sessao,
-                                IEmail email)
+                                IEmail email, IServices services)
         {
             _usuarioRepositorio = usuarioRepositorio;
             _sessao = sessao;
             _email = email;
+            _services = services;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             if (_sessao.BuscarSessaoDoUsuario() != null) return RedirectToAction("Index", "Home");
             return View();
         }
 
-        public IActionResult Sair()
+        [PaginaUser]
+        public async Task<IActionResult> Sair()
         {
+            await _services.Desconectar();
             _sessao.RemoverSessaoDoUsuario();
             return RedirectToAction("Index", "Login");
         }
 
+        [AllowAnonymous]
         public IActionResult Cadastrar()
         {
             if (_sessao.BuscarSessaoDoUsuario() != null) return RedirectToAction("Index", "Home");
@@ -66,7 +77,7 @@ namespace SistemasVendasDeAutomoveis.Controllers
         }
 
         [HttpPost]
-        public IActionResult Entrar(LoginModel loginModel)
+        public async Task<IActionResult> Entrar(LoginModel loginModel)
         {
             try
             {
@@ -76,8 +87,11 @@ namespace SistemasVendasDeAutomoveis.Controllers
 
                     if (usuario != null)
                     {
+
                         if (usuario.SenhaValida(loginModel.Senha))
                         {
+                            if (loginModel.LembrarLogin) await _services.Login(usuario);
+                           
                             _sessao.CriarSessaoDoUsuario(usuario);
                             return RedirectToAction("Index", "Home");
                         }

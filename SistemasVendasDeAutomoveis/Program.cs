@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 using SistemasVendasDeAutomoveis.Data;
 using SistemasVendasDeAutomoveis.Helper;
@@ -17,6 +19,15 @@ builder.Services.AddScoped<ICarroRepositorio, CarroRepositorio>();
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<ISessao, Sessao>();
 builder.Services.AddScoped<IEmail, Email>();
+builder.Services.AddScoped<IServices, Services>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(o =>
+    {
+        o.LoginPath = new PathString("/Login/Index/");
+        o.AccessDeniedPath = new PathString("/Login/Index/");
+    });
+
 
 builder.Services.AddSession(o =>
 {
@@ -40,9 +51,28 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    MinimumSameSitePolicy = SameSiteMode.Strict,
+    HttpOnly = HttpOnlyPolicy.Always
+}) ;
+
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();
+
+app.Use(async (context, next) =>
+{
+    if (context.User.Identity.IsAuthenticated && context.User.Claims.Any(c => c.Type == "IsPersistent" && c.Value == "true"))
+    {
+        context.Response.Redirect("/Home/Index");
+        return;
+    }
+
+    await next.Invoke();
+});
 
 app.UseEndpoints(endpoints =>
 {
