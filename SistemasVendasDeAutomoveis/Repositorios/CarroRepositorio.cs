@@ -22,6 +22,7 @@ namespace SistemasVendasDeAutomoveis.Repositorios
         public CarroModel BuscarPorId(int id)
         {
             return _context.Carros.FirstOrDefault(c => c.Id == id);
+
         }
 
         public CarroModel Adicionar(CarroModel carro)
@@ -66,6 +67,21 @@ namespace SistemasVendasDeAutomoveis.Repositorios
             _context.SaveChanges();
 
             return carroDB;
+        }
+
+        public bool Compra(CarroModel carroModel)
+        {
+            CarroModel carroDB = BuscarPorId(carroModel.Id);
+
+            if (carroDB == null) throw new Exception("Id não encontrado!");
+
+            carroDB.CompradorId = carroModel.CompradorId;
+            carroDB.Vendido = true;
+
+            _context.Carros.Update(carroDB);
+            _context.SaveChanges();
+
+            return true;
         }
     }
 }
