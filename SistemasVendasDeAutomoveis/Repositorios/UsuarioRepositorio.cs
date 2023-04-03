@@ -1,4 +1,5 @@
-﻿using SistemasVendasDeAutomoveis.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SistemasVendasDeAutomoveis.Data;
 using SistemasVendasDeAutomoveis.Models;
 using System.Runtime.ConstrainedExecution;
 using System.Text.RegularExpressions;
@@ -16,12 +17,18 @@ namespace SistemasVendasDeAutomoveis.Repositorios
 
         public List<UsuarioModel> ListarTodos()
         {
-            return _context.Usuarios.ToList();
+            return _context.Usuarios
+                    .Include(c => c.VeiculosComprados)
+                    .Include(c => c.VeiculosAnunciados)
+                    .ToList();
         }
 
         public UsuarioModel BuscarPorId(int id)
         {
-            return _context.Usuarios.Single(u => u.Id == id);
+            return _context.Usuarios
+                .Include(c => c.VeiculosComprados)
+                    .Include(c => c.VeiculosAnunciados)
+                .Single(u => u.Id == id);
         }
 
         public UsuarioModel BuscarPorEmail(string email)

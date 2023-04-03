@@ -17,6 +17,7 @@ $(document).ready(function () {
     });
 });
 
+
 $('.close').click(function () {
     $('.alert').hide('hide');
     $('.modal').hide('hide');

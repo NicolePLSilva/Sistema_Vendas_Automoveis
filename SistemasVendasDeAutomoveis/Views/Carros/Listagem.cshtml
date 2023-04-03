@@ -30,6 +30,7 @@
         <thead class="text-success">
             <tr class="bg-success">
                 <th scope="col">#</th>
+                <th scope="col">Status</th>
                 <th scope="col">Marca</th>
                 <th scope="col">Modelo</th>
                 <th scope="col">Ano</th>
@@ -45,6 +46,14 @@
                 {
                     <tr>
                         <th scope="row" class="text-success ">@carro.Id</th>
+                        @if(carro.Vendido)
+                        {
+                            <td class="text-danger fw-bold text-sm-start">Já Vendido</td>
+                        }
+                        else
+                        {
+                            <td class="text-success fw-bold text-sm-start">Disponível</td>
+                        }
                         <td>@carro.Marca</td>
                         <td>@carro.Modelo</td>
                         <td>@carro.Ano</td>

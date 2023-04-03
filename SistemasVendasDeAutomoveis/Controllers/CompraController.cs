@@ -9,23 +9,19 @@ namespace SistemasVendasDeAutomoveis.Controllers
     {
         private readonly ISessao _sessao;
         private readonly ICarroRepositorio _carroRepositorio;
-        private readonly IUsuarioRepositorio _usuarioRepositorio;
 
-        public CompraController(ISessao sessao, ICarroRepositorio carroRepositorio,
-                IUsuarioRepositorio usuarioRepositorio)
+        public CompraController(ISessao sessao, ICarroRepositorio carroRepositorio)
         {
             _sessao = sessao;      
             _carroRepositorio = carroRepositorio;
-            _usuarioRepositorio = usuarioRepositorio;
         }
 
         public IActionResult Index()
-        {
-            
+        {        
             return View();
         }
 
-        [HttpPost]
+        //[HttpPost]
         public IActionResult EfetuarCompra(int id)
         {
             //código provisório

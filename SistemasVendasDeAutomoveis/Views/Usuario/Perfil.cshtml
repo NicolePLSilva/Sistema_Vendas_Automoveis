@@ -105,15 +105,16 @@
                             </dd>
                             <dt class="col-sm-4">Comprador: </dt>
                             <dd class="col-sm-8">
-                                Qtd carros comprados.
+                                @(Model.VeiculosComprados?.Count ?? 0)
                             </dd>
-                            <dt class="col-sm-4">Anunciador: </dt>
+                            <dt class="col-sm-4">Anunciante: </dt>
                             <dd class="col-sm-8">
-                                Qtd carros anunciados.
+                                @(Model.VeiculosAnunciados?.Count ?? 0)
                             </dd>
                             <dt class="col-sm-4">Vendidos: </dt>
                             <dd class="col-sm-8">
-                                Qtd carros vendidos.
+                               
+                                @(Model.VeiculosAnunciados?.Count(c => c.Vendido) ?? 0)
                             </dd>
                         </dl>
 

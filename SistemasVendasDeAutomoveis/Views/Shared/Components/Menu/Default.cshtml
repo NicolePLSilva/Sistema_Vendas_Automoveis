@@ -14,9 +14,13 @@
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="Carros" asp-action="Index">Comprar</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Vender*</a>
-        </li>
+        @if(Model.IsAnunciante)
+        {
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="Carros" asp-action="Cadastrar">Anunciar</a>
+            </li>
+        }
+        
     
         @if (Model.Perfil == PerfilEnum.ADMIN)
         {

@@ -25,6 +25,16 @@ namespace SistemasVendasDeAutomoveis.Repositorios
 
         }
 
+        public List<CarroModel> BuscarPorIdVendedor(int usuarioId)
+        {
+            return _context.Carros.Where(v => v.VendedorId == usuarioId).ToList();
+        }
+
+        public List<CarroModel> BuscarPorIdComprador(int usuarioId)
+        {
+            return _context.Carros.Where(c => c.CompradorId == usuarioId).ToList();
+        }
+
         public CarroModel Adicionar(CarroModel carro)
         {
             _context.Carros.Add(carro);
@@ -83,5 +93,7 @@ namespace SistemasVendasDeAutomoveis.Repositorios
 
             return true;
         }
+
+        
     }
 }

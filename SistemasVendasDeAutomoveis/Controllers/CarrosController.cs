@@ -21,14 +21,58 @@ namespace SistemasVendasDeAutomoveis.Controllers
             _sessao = sessao;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string marca, string modelo, int anoMin, int anoMax, int kmMax, string carroceria,
+            string combustivel, string cambio, string cor, decimal precoMin, decimal precoMax)
         {
             List<CarroModel> carros = _carroRepositorio.ListarTodos();
-            return View(carros);
+
+            carros = carros.Where(c => c.Vendido == false).ToList();
+
+            carros = carros.Where(c =>
+                (marca == null || c.Marca.ToLower() == marca.ToLower()) &&
+                (modelo == null || c.Modelo.ToLower() == modelo.ToLower()) &&
+                (anoMin == 0 || c.Ano >= anoMin) &&
+                (anoMax == 0 || c.Ano <= anoMax) &&
+                (kmMax == 0 || c.Quilometragem <= kmMax) &&
+                (carroceria == null || c.Carroceria.ToString() == carroceria) &&
+                (combustivel == null || c.Combustivel.ToString() == combustivel) &&
+                (cambio == null || c.Cambio.ToString() == cambio) &&
+                (cor == null || c.Cor.ToLower() == cor.ToLower()) &&
+                (precoMin == 0 || c.Preco >= precoMin) &&
+                (precoMax == 0 || c.Preco <= precoMax)
+            ).ToList();
+
+
+            ViewBag.MarcaSelecionada = marca;
+            ViewBag.ModeloSelecionado = modelo;
+            ViewBag.AnoMin = anoMin;
+            ViewBag.AnoMax = anoMax;
+            ViewBag.KmMax = kmMax;
+            ViewBag.PrecoMin = precoMin;
+            ViewBag.PrecoMax = precoMax;
+            ViewBag.Combustivel = combustivel;
+            ViewBag.Carroceria = carroceria;
+            ViewBag.Cambio = cambio;
+            ViewBag.Cor = cor;
+
+
+            var carrosAgrupados = carros.GroupBy(c => c.Marca);
+            var modelosAgrupados = carros.GroupBy(c => c.Modelo);
+            var coresAgrupadas = carros.GroupBy(c => c.Cor);
+
+            ViewBag.CarrosAgrupados = carrosAgrupados.ToList();
+            ViewBag.ModelosAgrupados = modelosAgrupados.ToList();
+            ViewBag.CoresAgrupadas = coresAgrupadas.ToList();
+
+
+            return View(carros.ToList());
         }
 
+        [PaginaUserAnunciante]
         public IActionResult Listagem()
         {
+            UsuarioModel usuario = _sessao.BuscarSessaoDoUsuario();
+            if (usuario.Perfil != Enums.PerfilEnum.ADMIN) return RedirectToAction("Index", "Home");
             List<CarroModel> carros = _carroRepositorio.ListarTodos();
             return View(carros);
         }
@@ -40,29 +84,54 @@ namespace SistemasVendasDeAutomoveis.Controllers
             return View(carro);
         }
 
-        [PaginaAdmin]
+        [PaginaUserAnunciante]
         public IActionResult Gerenciar(int id)
         {
             CarroModel carro = _carroRepositorio.BuscarPorId(id);
+
+            UsuarioModel usuario = _sessao.BuscarSessaoDoUsuario();
+            if (carro.VendedorId != usuario.Id && usuario.Perfil != Enums.PerfilEnum.ADMIN)
+            {
+                TempData["MensagemErro"] = "Você não tem persmissão para gerenciar aquele veículo!";
+                return RedirectToAction("Index", "Home");
+            }
+
             return View("GerenciarVeiculo", carro);
         }
 
-        [PaginaAdmin]
+        [PaginaUserAnunciante]
         public IActionResult Cadastrar()
         {
             return View();
         }
 
-        [PaginaAdmin]
+        [PaginaUserAnunciante]
         public IActionResult Editar(int id)
         {
             CarroModel carroModel = _carroRepositorio.BuscarPorId(id);
+
+            UsuarioModel usuario = _sessao.BuscarSessaoDoUsuario();
+            if (carroModel.VendedorId != usuario.Id && usuario.Perfil != Enums.PerfilEnum.ADMIN)
+            {
+                TempData["MensagemErro"] = "Você não tem persmissão para gerenciar aquele veículo!";
+                return RedirectToAction("Index", "Home");
+            }
+
             return View(carroModel);
         }
 
-        [PaginaAdmin]
+        [PaginaUserAnunciante]
         public IActionResult Excluir(int id)
         {
+            CarroModel carro = _carroRepositorio.BuscarPorId(id);
+
+            UsuarioModel usuario = _sessao.BuscarSessaoDoUsuario();
+            if (carro.VendedorId != usuario.Id && usuario.Perfil != Enums.PerfilEnum.ADMIN)
+            {
+                TempData["MensagemErro"] = "Você não tem persmissão para gerenciar aquele veículo!";
+                return RedirectToAction("Index", "Home");
+            }
+
             try
             {
                 bool removido = _carroRepositorio.Remover(id);

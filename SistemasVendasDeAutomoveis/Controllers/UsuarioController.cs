@@ -9,10 +9,12 @@ namespace SistemasVendasDeAutomoveis.Controllers
     public class UsuarioController : Controller
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+        private readonly ICarroRepositorio _carroRepositorio;
 
-        public UsuarioController(IUsuarioRepositorio usuarioRepositorio)
+        public UsuarioController(IUsuarioRepositorio usuarioRepositorio, ICarroRepositorio carroRepositorio)
         {
             _usuarioRepositorio = usuarioRepositorio;
+            _carroRepositorio = carroRepositorio;
         }
 
         public IActionResult Index()
@@ -115,5 +117,10 @@ namespace SistemasVendasDeAutomoveis.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        //public IActionResult ListarCarrosAnunciados(int id)
+        //{
+            
+        //}
     }
 }

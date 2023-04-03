@@ -9,6 +9,10 @@ namespace SistemasVendasDeAutomoveis.Repositorios
 
         CarroModel BuscarPorId(int id);
 
+        List<CarroModel> BuscarPorIdVendedor(int usuarioId);
+
+        List<CarroModel> BuscarPorIdComprador(int usuarioId);
+
         CarroModel Adicionar(CarroModel carro);
         
         bool Remover(int id);
